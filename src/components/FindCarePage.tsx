@@ -17,7 +17,7 @@ import {
   Clock,
   DollarSign,
   Users,
-  Wheelchair,
+  Accessibility,
   Home,
   Building
 } from 'lucide-react';
