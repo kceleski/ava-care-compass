@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -30,6 +29,7 @@ import {
 } from 'lucide-react';
 import ResourceCard from './ResourceCard';
 import ToolCard from './ToolCard';
+import ResourceModal from './ResourceModal';
 
 const ResourcesPage = () => {
   const [avaQuery, setAvaQuery] = useState('');
@@ -37,6 +37,18 @@ const ResourcesPage = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [selectedResource, setSelectedResource] = useState<{
+    title: string;
+    description: string;
+    type: string;
+    tag: string;
+  } | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleResourceView = (resource: { title: string; description: string; type: string; tag: string }) => {
+    setSelectedResource(resource);
+    setIsModalOpen(true);
+  };
 
   const handleAvaQuery = async () => {
     if (!avaQuery.trim()) return;
@@ -316,7 +328,7 @@ const ResourcesPage = () => {
                       description={resource.description}
                       type={resource.type}
                       tag={resource.tag}
-                      onView={() => console.log(`Viewing ${resource.title}`)}
+                      onView={() => handleResourceView(resource)}
                     />
                   ))}
                 </div>
@@ -421,6 +433,12 @@ const ResourcesPage = () => {
           </div>
         </div>
       </section>
+
+      <ResourceModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        resource={selectedResource}
+      />
     </div>
   );
 };
