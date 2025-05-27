@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import { 
   BookOpen, 
   Heart, 
@@ -18,13 +19,24 @@ import {
   ExternalLink,
   MessageCircle,
   Send,
-  Loader2
+  Loader2,
+  Star,
+  CheckCircle,
+  ArrowRight,
+  Play,
+  Calendar,
+  Mail,
+  Globe
 } from 'lucide-react';
+import ResourceCard from './ResourceCard';
+import ToolCard from './ToolCard';
 
 const ResourcesPage = () => {
   const [avaQuery, setAvaQuery] = useState('');
   const [avaResponse, setAvaResponse] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
 
   const handleAvaQuery = async () => {
     if (!avaQuery.trim()) return;
@@ -37,16 +49,23 @@ const ResourcesPage = () => {
     }, 2000);
   };
 
+  const handleSubscribe = () => {
+    if (email.trim()) {
+      setSubscribed(true);
+      setTimeout(() => setSubscribed(false), 3000);
+    }
+  };
+
   const resourceCategories = [
     {
       title: "Care Planning Guides",
       icon: <BookOpen className="h-6 w-6" />,
       description: "Comprehensive guides for planning senior care",
       resources: [
-        { name: "How to Choose the Right Care Level", type: "PDF Guide", tag: "Essential" },
-        { name: "Understanding Memory Care Options", type: "Video Series", tag: "Popular" },
-        { name: "Financial Planning for Senior Care", type: "Webinar", tag: "Free" },
-        { name: "Family Care Conference Guide", type: "Checklist", tag: "New" }
+        { title: "How to Choose the Right Care Level", description: "Step-by-step guide to determine appropriate care", type: "PDF Guide", tag: "Essential" },
+        { title: "Understanding Memory Care Options", description: "Complete overview of memory care facilities", type: "Video Series", tag: "Popular" },
+        { title: "Financial Planning for Senior Care", description: "Budget and payment strategies", type: "Webinar", tag: "Free" },
+        { title: "Family Care Conference Guide", description: "How to organize family discussions", type: "Checklist", tag: "New" }
       ]
     },
     {
@@ -54,10 +73,10 @@ const ResourcesPage = () => {
       icon: <Heart className="h-6 w-6" />,
       description: "Resources for maintaining health and wellbeing",
       resources: [
-        { name: "Nutrition Guidelines for Seniors", type: "Article", tag: "Expert" },
-        { name: "Exercise Programs for Different Mobility Levels", type: "Video", tag: "Popular" },
-        { name: "Medication Management Tips", type: "Guide", tag: "Essential" },
-        { name: "Mental Health and Aging", type: "Resource Kit", tag: "Free" }
+        { title: "Nutrition Guidelines for Seniors", description: "Age-appropriate dietary recommendations", type: "Article", tag: "Expert" },
+        { title: "Exercise Programs for Different Mobility Levels", description: "Adapted fitness routines", type: "Video", tag: "Popular" },
+        { title: "Medication Management Tips", description: "Safe medication practices", type: "Guide", tag: "Essential" },
+        { title: "Mental Health and Aging", description: "Emotional wellbeing resources", type: "Resource Kit", tag: "Free" }
       ]
     },
     {
@@ -65,10 +84,10 @@ const ResourcesPage = () => {
       icon: <Shield className="h-6 w-6" />,
       description: "Important legal and financial considerations",
       resources: [
-        { name: "Power of Attorney Explained", type: "Legal Guide", tag: "Essential" },
-        { name: "Medicare vs. Medicaid Coverage", type: "Comparison", tag: "Popular" },
-        { name: "Estate Planning Basics", type: "Webinar", tag: "Expert" },
-        { name: "Insurance Claims Process", type: "Step-by-Step", tag: "Free" }
+        { title: "Power of Attorney Explained", description: "Legal authority and responsibilities", type: "Legal Guide", tag: "Essential" },
+        { title: "Medicare vs. Medicaid Coverage", description: "Insurance coverage comparison", type: "Comparison", tag: "Popular" },
+        { title: "Estate Planning Basics", description: "Wills, trusts, and inheritance", type: "Webinar", tag: "Expert" },
+        { title: "Insurance Claims Process", description: "Filing and managing claims", type: "Step-by-Step", tag: "Free" }
       ]
     },
     {
@@ -76,10 +95,10 @@ const ResourcesPage = () => {
       icon: <Users className="h-6 w-6" />,
       description: "Support and guidance for families",
       resources: [
-        { name: "Having 'The Conversation'", type: "Guide", tag: "Essential" },
-        { name: "Support Groups Near You", type: "Directory", tag: "Local" },
-        { name: "Caregiver Self-Care", type: "Resource Kit", tag: "Popular" },
-        { name: "Long-Distance Caregiving", type: "Handbook", tag: "Expert" }
+        { title: "Having 'The Conversation'", description: "Discussing care needs with family", type: "Guide", tag: "Essential" },
+        { title: "Support Groups Near You", description: "Local community resources", type: "Directory", tag: "Local" },
+        { title: "Caregiver Self-Care", description: "Managing caregiver stress", type: "Resource Kit", tag: "Popular" },
+        { title: "Long-Distance Caregiving", description: "Managing care from afar", type: "Handbook", tag: "Expert" }
       ]
     }
   ];
@@ -111,17 +130,30 @@ const ResourcesPage = () => {
     }
   ];
 
-  const getTagColor = (tag: string) => {
-    switch (tag) {
-      case 'Essential': return 'bg-accent-patriotic text-white';
-      case 'Popular': return 'bg-primary-bright text-white';
-      case 'Expert': return 'bg-primary-dark text-white';
-      case 'Free': return 'bg-success text-white';
-      case 'New': return 'bg-warning text-white';
-      case 'Local': return 'bg-secondary-soft text-text-primary';
-      default: return 'bg-surface-soft text-text-secondary';
+  const quickStats = [
+    { number: "10,000+", label: "Families Helped", icon: <Users className="h-5 w-5" /> },
+    { number: "500+", label: "Care Facilities", icon: <MapPin className="h-5 w-5" /> },
+    { number: "24/7", label: "Support Available", icon: <Clock className="h-5 w-5" /> },
+    { number: "4.9★", label: "Average Rating", icon: <Star className="h-5 w-5" /> }
+  ];
+
+  const testimonials = [
+    {
+      text: "AVA helped us find the perfect memory care facility for my mother. The guidance was invaluable.",
+      author: "Sarah Johnson",
+      role: "Daughter & Caregiver"
+    },
+    {
+      text: "The resources here saved us months of research. Everything we needed was in one place.",
+      author: "Michael Chen",
+      role: "Son & Care Coordinator"
+    },
+    {
+      text: "As a veteran, I appreciated the specialized support for VA benefits and military families.",
+      author: "Robert Martinez",
+      role: "Veteran & Spouse"
     }
-  };
+  ];
 
   return (
     <div className="min-h-screen bg-background pt-24">
@@ -135,6 +167,20 @@ const ResourcesPage = () => {
             <p className="text-xl text-blue-100 mb-8">
               Expert guidance, tools, and support for your senior care journey
             </p>
+            
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+              {quickStats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="flex items-center justify-center mb-2">
+                    {stat.icon}
+                  </div>
+                  <div className="text-2xl font-bold">{stat.number}</div>
+                  <div className="text-sm text-blue-100">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
             <div className="flex flex-wrap gap-4 justify-center">
               <Button 
                 size="lg" 
@@ -249,39 +295,32 @@ const ResourcesPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="space-y-12">
             {resourceCategories.map((category, index) => (
-              <Card key={index} className="glass-card hover:shadow-lg transition-shadow animate-fade-in">
-                <CardHeader>
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-primary-bright/10 rounded-lg text-primary-bright">
-                      {category.icon}
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl">{category.title}</CardTitle>
-                      <CardDescription>{category.description}</CardDescription>
-                    </div>
+              <div key={index} className="animate-fade-in">
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="p-3 bg-primary-bright/10 rounded-lg text-primary-bright">
+                    {category.icon}
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {category.resources.map((resource, resourceIndex) => (
-                      <div key={resourceIndex} className="flex items-center justify-between p-3 bg-surface-soft rounded-lg hover:bg-primary-bright/5 transition-colors cursor-pointer">
-                        <div className="flex-1">
-                          <h4 className="font-medium text-text-primary">{resource.name}</h4>
-                          <p className="text-sm text-text-secondary">{resource.type}</p>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Badge className={getTagColor(resource.tag)}>
-                            {resource.tag}
-                          </Badge>
-                          <ExternalLink className="h-4 w-4 text-text-secondary" />
-                        </div>
-                      </div>
-                    ))}
+                  <div>
+                    <h3 className="text-2xl font-bold text-text-primary">{category.title}</h3>
+                    <p className="text-text-secondary">{category.description}</p>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {category.resources.map((resource, resourceIndex) => (
+                    <ResourceCard
+                      key={resourceIndex}
+                      title={resource.title}
+                      description={resource.description}
+                      type={resource.type}
+                      tag={resource.tag}
+                      onView={() => console.log(`Viewing ${resource.title}`)}
+                    />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -301,16 +340,45 @@ const ResourcesPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {tools.map((tool, index) => (
-              <Card key={index} className="glass-card hover:shadow-lg transition-all hover:scale-105 cursor-pointer animate-fade-in">
-                <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-primary-bright/10 rounded-lg flex items-center justify-center text-primary-bright">
-                    {tool.icon}
+              <ToolCard
+                key={index}
+                title={tool.title}
+                description={tool.description}
+                icon={tool.icon}
+                action={tool.action}
+                onClick={() => console.log(`Using ${tool.title}`)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
+              What Families Say
+            </h2>
+            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+              Real stories from families who found the perfect care solutions
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="glass-card animate-fade-in">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-warning text-warning" />
+                    ))}
                   </div>
-                  <h3 className="font-semibold text-text-primary mb-2">{tool.title}</h3>
-                  <p className="text-sm text-text-secondary mb-4">{tool.description}</p>
-                  <Button className="w-full bg-primary-bright hover:bg-primary-dark">
-                    {tool.action}
-                  </Button>
+                  <p className="text-text-primary mb-4 italic">"{testimonial.text}"</p>
+                  <div>
+                    <p className="font-semibold text-text-primary">{testimonial.author}</p>
+                    <p className="text-sm text-text-secondary">{testimonial.role}</p>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -326,16 +394,30 @@ const ResourcesPage = () => {
             <p className="text-blue-100 mb-8">
               Get the latest senior care insights, tips, and resources delivered to your inbox
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-text-primary"
-              />
-              <Button className="bg-white text-primary-bright hover:bg-gray-100">
-                Subscribe
-              </Button>
-            </div>
+            
+            {subscribed ? (
+              <div className="flex items-center justify-center space-x-2 text-green-300">
+                <CheckCircle className="h-5 w-5" />
+                <span>Thank you for subscribing!</span>
+              </div>
+            ) : (
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 bg-white text-text-primary"
+                />
+                <Button 
+                  className="bg-white text-primary-bright hover:bg-gray-100"
+                  onClick={handleSubscribe}
+                >
+                  <Mail className="mr-2 h-4 w-4" />
+                  Subscribe
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </section>
