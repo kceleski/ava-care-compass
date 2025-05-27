@@ -20,7 +20,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center space-x-2 text-white/60">
               <Heart className="h-4 w-4" />
-              <span className="text-sm">Serving Veterans & Families Since 2024</span>
+              <span className="text-sm">Serving Veterans & Families Since 2015</span>
             </div>
           </div>
 
@@ -91,14 +91,14 @@ const Footer = () => {
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-white/60" />
                 <a href="mailto:hello@healthproassist.com" className="text-white/80 hover:text-white text-sm">
-                  hello@healthproassist.com
+                  contact@healthproassist.com
                 </a>
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-white/60 mt-0.5" />
                 <div className="text-white/80 text-sm">
-                  123 Healthcare Blvd<br />
-                  Austin, TX 78701
+                  HealthProAssist<br />
+                  United States 
                 </div>
               </div>
             </div>
@@ -108,10 +108,10 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/20 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm">
-            © 2024 HealthProAssist. All rights reserved.
+            © 2025 HealthProAssist. All rights reserved.
           </p>
           <p className="text-white/60 text-sm mt-2 md:mt-0">
-            Made with ❤️ for America's seniors and veterans
+            Made with ❤️ for America's Seniors and Veterans
           </p>
         </div>
       </div>
