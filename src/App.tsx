@@ -12,6 +12,7 @@ import HomePage from "./components/HomePage";
 import FindCarePage from "./components/FindCarePage";
 import TermsPage from "./components/TermsPage";
 import ResourcesPage from "./components/ResourcesPage";
+import AdvertisePage from "./components/AdvertisePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,9 +34,9 @@ const App = () => {
                 <Route path="/find-care" element={<FindCarePage />} />
                 <Route path="/resources" element={<ResourcesPage />} />
                 <Route path="/terms" element={<TermsPage />} />
+                <Route path="/advertise" element={<AdvertisePage />} />
                 {/* Placeholder routes for future implementation */}
                 <Route path="/contact" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Contact Page Coming Soon</h1></div>} />
-                <Route path="/advertise" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Advertise Page Coming Soon</h1></div>} />
                 <Route path="/login" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Login Page Coming Soon</h1></div>} />
                 <Route path="/register" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Register Page Coming Soon</h1></div>} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
