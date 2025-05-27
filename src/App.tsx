@@ -11,6 +11,7 @@ import AvaWidget from "./components/AvaWidget";
 import HomePage from "./components/HomePage";
 import FindCarePage from "./components/FindCarePage";
 import TermsPage from "./components/TermsPage";
+import ResourcesPage from "./components/ResourcesPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,9 +31,9 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/find-care" element={<FindCarePage />} />
+                <Route path="/resources" element={<ResourcesPage />} />
                 <Route path="/terms" element={<TermsPage />} />
                 {/* Placeholder routes for future implementation */}
-                <Route path="/resources" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Resources Page Coming Soon</h1></div>} />
                 <Route path="/contact" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Contact Page Coming Soon</h1></div>} />
                 <Route path="/advertise" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Advertise Page Coming Soon</h1></div>} />
                 <Route path="/login" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Login Page Coming Soon</h1></div>} />
