@@ -1,9 +1,8 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useRoutes } from "react-router-dom";
 import { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -14,6 +13,8 @@ import TermsPage from "./components/TermsPage";
 import ResourcesPage from "./components/ResourcesPage";
 import AdvertisePage from "./components/AdvertisePage";
 import NotFound from "./pages/NotFound";
+// Import tempo routes
+import routes from "tempo-routes";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,8 @@ const App = () => {
           <div className="min-h-screen flex flex-col">
             <Header />
             <main className="flex-grow">
+              {/* Tempo routes */}
+              {import.meta.env.VITE_TEMPO && useRoutes(routes)}
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/find-care" element={<FindCarePage />} />
@@ -36,15 +39,38 @@ const App = () => {
                 <Route path="/terms" element={<TermsPage />} />
                 <Route path="/advertise" element={<AdvertisePage />} />
                 {/* Placeholder routes for future implementation */}
-                <Route path="/contact" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Contact Page Coming Soon</h1></div>} />
-                <Route path="/login" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Login Page Coming Soon</h1></div>} />
-                <Route path="/register" element={<div className="pt-24 p-8 text-center"><h1 className="text-2xl">Register Page Coming Soon</h1></div>} />
+                <Route
+                  path="/contact"
+                  element={
+                    <div className="pt-24 p-8 text-center">
+                      <h1 className="text-2xl">Contact Page Coming Soon</h1>
+                    </div>
+                  }
+                />
+                <Route
+                  path="/login"
+                  element={
+                    <div className="pt-24 p-8 text-center">
+                      <h1 className="text-2xl">Login Page Coming Soon</h1>
+                    </div>
+                  }
+                />
+                <Route
+                  path="/register"
+                  element={
+                    <div className="pt-24 p-8 text-center">
+                      <h1 className="text-2xl">Register Page Coming Soon</h1>
+                    </div>
+                  }
+                />
+                {/* Allow Tempo to capture routes before the catchall */}
+                {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
             <Footer />
-            <AvaWidget 
+            <AvaWidget
               isFullScreen={avaFullScreen}
               onFullScreenToggle={() => setAvaFullScreen(!avaFullScreen)}
             />
