@@ -174,7 +174,7 @@ const AdvertisePage = () => {
             Connect with families actively searching for senior care. Join thousands of providers who trust HealthProAssist to grow their business.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-primary-dark hover:bg-surface-light">
+            <Button size="lg" className="bg-white text-primary-dark hover:bg-surface-red">
               <Phone className="mr-2 h-5 w-5" />
               Get Started Today
             </Button>
