@@ -178,7 +178,7 @@ const AdvertisePage = () => {
               <Phone className="mr-2 h-5 w-5" />
               Get Started Today
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-dark">
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-yellow hover:text-primary-dark">
               <Calendar className="mr-2 h-5 w-5" />
               Schedule Demo
             </Button>
