@@ -27,40 +27,40 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-8">
             <Link 
               to="/" 
-              className={`text-sm font-medium transition-colors hover:text-primary-bright ${
-                isActive('/') ? 'text-primary-bright' : 'text-text-primary'
+              className={`text-sm font-medium transition-colors hover:text-primary-red ${
+                isActive('/') ? 'text-primary-red' : 'text-text-primary'
               }`}
             >
               Home
             </Link>
             <Link 
               to="/find-care" 
-              className={`text-sm font-medium transition-colors hover:text-primary-bright ${
-                isActive('/find-care') ? 'text-primary-bright' : 'text-text-primary'
+              className={`text-sm font-medium transition-colors hover:text-primary-red ${
+                isActive('/find-care') ? 'text-primary-red' : 'text-text-primary'
               }`}
             >
               Find Care
             </Link>
             <Link 
               to="/resources" 
-              className={`text-sm font-medium transition-colors hover:text-primary-bright ${
-                isActive('/resources') ? 'text-primary-bright' : 'text-text-primary'
+              className={`text-sm font-medium transition-colors hover:text-primary-red ${
+                isActive('/resources') ? 'text-primary-red' : 'text-text-primary'
               }`}
             >
               Resources
             </Link>
             <Link 
               to="/contact" 
-              className={`text-sm font-medium transition-colors hover:text-primary-bright ${
-                isActive('/contact') ? 'text-primary-bright' : 'text-text-primary'
+              className={`text-sm font-medium transition-colors hover:text-primary-red ${
+                isActive('/contact') ? 'text-primary-red' : 'text-text-primary'
               }`}
             >
               Contact Us
             </Link>
             <Link 
               to="/advertise" 
-              className={`text-sm font-medium transition-colors hover:text-primary-bright ${
-                isActive('/advertise') ? 'text-primary-bright' : 'text-text-primary'
+              className={`text-sm font-medium transition-colors hover:text-primary-red ${
+                isActive('/advertise') ? 'text-primary-red' : 'text-text-primary'
               }`}
             >
               Advertise
@@ -72,7 +72,7 @@ const Header = () => {
             <Button variant="ghost" asChild>
               <Link to="/login">Login</Link>
             </Button>
-            <Button asChild className="bg-primary-bright hover:bg-primary-dark">
+            <Button asChild className="bg-primary-red hover:bg-primary-dark">
               <Link to="/register">Sign Up</Link>
             </Button>
           </div>
