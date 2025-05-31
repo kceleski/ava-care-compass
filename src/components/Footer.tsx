@@ -85,7 +85,7 @@ const Footer = () => {
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-white/60" />
                 <a href="tel:1-800-432-584" className="text-white/80 hover:text-white text-sm">
-                  1-800-HEALTH (432-584)
+                  (623) 300-2065
                 </a>
               </div>
               <div className="flex items-center space-x-2">
@@ -98,7 +98,7 @@ const Footer = () => {
                 <MapPin className="h-4 w-4 text-white/60 mt-0.5" />
                 <div className="text-white/80 text-sm">
                   HealthProAssist<br />
-                  United States 
+                  Arizona, United States 
                 </div>
               </div>
             </div>
