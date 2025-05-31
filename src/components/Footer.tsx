@@ -12,7 +12,7 @@ const Footer = () => {
             <img 
               src="/lovable-uploads/07f785bc-439e-4bb9-a549-3f4a165764c6.png" 
               alt="HealthProAssist" 
-              className="h-8 w-auto filter brightness-0 invert"
+              className="h-8 w-auto"
             />
             <p className="text-white/80 text-sm">
               AI-powered senior care placement platform dedicated to helping families 
