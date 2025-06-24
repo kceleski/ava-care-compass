@@ -382,8 +382,8 @@ const HomePage = () => {
                   <Phone className="h-12 w-12 text-primary-bright mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-text-primary mb-2">Call Us</h3>
                   <p className="text-text-secondary">
-                    <a href="tel:1-800-HEALTH" className="hover:text-primary-bright">
-                      1-800-HEALTH (432-584)
+                    <a href="tel:1-623-300-2065" className="hover:text-primary-bright">
+                      1 (623) 300-2065
                     </a>
                   </p>
                 </CardContent>
@@ -394,8 +394,8 @@ const HomePage = () => {
                   <Mail className="h-12 w-12 text-primary-bright mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-text-primary mb-2">Email Us</h3>
                   <p className="text-text-secondary">
-                    <a href="mailto:hello@healthproassist.com" className="hover:text-primary-bright">
-                      hello@healthproassist.com
+                    <a href="mailto:contact@healthproassist.com" className="hover:text-primary-bright">
+                      contact@healthproassist.com
                     </a>
                   </p>
                 </CardContent>
@@ -406,8 +406,8 @@ const HomePage = () => {
                   <MapPin className="h-12 w-12 text-primary-bright mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-text-primary mb-2">Visit Us</h3>
                   <p className="text-text-secondary">
-                    123 Healthcare Blvd<br />
-                    Austin, TX 78701
+                    Nationwide Service<br />
+                    Located in Arizona, USA
                   </p>
                 </CardContent>
               </Card>
