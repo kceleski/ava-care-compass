@@ -1,5 +1,5 @@
-
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MessageCircle, Mic, MicOff, Minimize2, Maximize2 } from 'lucide-react';
@@ -14,6 +14,7 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
   const [isMinimized, setIsMinimized] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [showFullScreen, setShowFullScreen] = useState(false);
+  const navigate = useNavigate();
 
   // Auto-deploy full screen on scroll (as specified in requirements)
   useEffect(() => {
@@ -27,6 +28,10 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [showFullScreen, onFullScreenToggle]);
+
+  const handleStartAssessment = () => {
+    navigate('/find-care');
+  };
 
   if (isFullScreen) {
     return (
@@ -141,7 +146,11 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
           </div>
           
           <div className="flex space-x-2">
-            <Button size="sm" className="flex-1 text-xs bg-primary-bright hover:bg-primary-dark">
+            <Button 
+              size="sm" 
+              className="flex-1 text-xs bg-primary-bright hover:bg-primary-dark"
+              onClick={handleStartAssessment}
+            >
               Start Assessment
             </Button>
             <Button
