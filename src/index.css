@@ -96,15 +96,43 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/80 backdrop-blur-sm border border-border shadow-lg;
+    @apply bg-white/90 backdrop-blur-md border border-white/20 shadow-xl shadow-primary/10;
   }
   
   .hero-gradient {
-    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%); /* Bolder, modern hero gradient */
+    background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
   }
   
   .service-gradient {
-    background: linear-gradient(135deg, #6ee7b7 0%, #3b82f6 100%); /* Fresher service gradient */
+    background: linear-gradient(135deg, #6ee7b7 0%, #3b82f6 100%);
+    box-shadow: 0 8px 25px rgba(110, 231, 183, 0.4);
+  }
+  
+  .header-glass {
+    @apply bg-white/95 backdrop-blur-lg border-b border-white/20;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 16px rgba(59, 130, 246, 0.1);
+  }
+  
+  .vibrant-card {
+    @apply bg-white/90 backdrop-blur-sm border border-white/30 shadow-2xl;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 20px rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .vibrant-card:hover {
+    @apply scale-105;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 30px rgba(59, 130, 246, 0.2);
+  }
+  
+  .glow-button {
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4), 0 0 20px rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .glow-button:hover {
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6), 0 0 30px rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
   }
 }
 
@@ -115,5 +143,14 @@
   
   .animate-zoom-in {
     animation: zoom-in 0.4s ease-out;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  }
+  
+  .border-glow {
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
   }
 }

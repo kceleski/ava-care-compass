@@ -13,15 +13,15 @@ interface ToolCardProps {
 
 const ToolCard = ({ title, description, icon, action, onClick }: ToolCardProps) => {
   return (
-    <Card className="group hover:shadow-lg transition-all hover:scale-105 cursor-pointer animate-fade-in">
+    <Card className="vibrant-card group cursor-pointer animate-fade-in">
       <CardContent className="p-6 text-center">
-        <div className="w-16 h-16 mx-auto mb-4 bg-primary-bright/10 rounded-lg flex items-center justify-center text-primary-bright group-hover:bg-primary-bright group-hover:text-white transition-all">
+        <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary-bright/20 to-primary-dark/20 rounded-lg flex items-center justify-center text-primary-bright group-hover:from-primary-bright group-hover:to-primary-dark group-hover:text-white transition-all duration-300 shadow-lg">
           {icon}
         </div>
-        <h3 className="font-semibold text-text-primary mb-2">{title}</h3>
+        <h3 className="font-semibold text-text-primary mb-2 group-hover:text-glow transition-all">{title}</h3>
         <p className="text-sm text-text-secondary mb-4">{description}</p>
         <Button 
-          className="w-full bg-primary-bright hover:bg-primary-dark"
+          className="w-full bg-primary-bright hover:bg-primary-dark glow-button"
           onClick={onClick}
         >
           {action}
