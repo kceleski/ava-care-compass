@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -136,7 +135,7 @@ const HomePage = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Button size="lg" asChild className="bg-neon-red hover:bg-neon-red-dark text-white px-8 py-4 text-lg shadow-2xl">
+              <Button size="lg" asChild className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 text-lg shadow-2xl">
                 <Link to="/find-care">
                   <Search className="mr-2 h-5 w-5" />
                   Start Your Search
@@ -186,8 +185,8 @@ const HomePage = () => {
             {features.map((feature, index) => (
               <Card key={index} className="glass-card hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 bg-sky-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <feature.icon className="h-8 w-8 text-sky-500" />
+                  <div className="w-16 h-16 bg-primary-bright/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <feature.icon className="h-8 w-8 text-primary-bright" />
                   </div>
                   <h3 className="text-xl font-semibold text-text-primary mb-3">{feature.title}</h3>
                   <p className="text-text-secondary">{feature.description}</p>
@@ -202,13 +201,13 @@ const HomePage = () => {
       <ParallaxDivider />
 
       {/* AVA's Process Section */}
-      <section className="ava-process-gradient py-16 text-white relative">
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="py-16 bg-surface-soft">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-glow">
+            <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">
               How AVA Works
             </h2>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
+            <p className="text-xl text-text-secondary max-w-2xl mx-auto">
               Our simple 3-step process powered by advanced AI gets you connected 
               with the right care in no time.
             </p>
@@ -217,15 +216,15 @@ const HomePage = () => {
           <div className="max-w-4xl mx-auto">
             {steps.map((step, index) => (
               <div key={index} className="flex items-start mb-12 last:mb-0 animate-fade-in">
-                <div className="flex-shrink-0 w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white font-bold text-xl mr-6 border-2 border-white/30">
+                <div className="flex-shrink-0 w-16 h-16 bg-primary-bright rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
                   {step.number}
                 </div>
                 <div className="flex-grow">
-                  <h3 className="text-2xl font-semibold text-white mb-3 text-glow">{step.title}</h3>
-                  <p className="text-lg text-white/90">{step.description}</p>
+                  <h3 className="text-2xl font-semibold text-text-primary mb-3">{step.title}</h3>
+                  <p className="text-lg text-text-secondary">{step.description}</p>
                 </div>
                 {index < steps.length - 1 && (
-                  <ArrowRight className="h-6 w-6 text-white/70 mt-4 ml-6 hidden md:block" />
+                  <ArrowRight className="h-6 w-6 text-primary-bright mt-4 ml-6 hidden md:block" />
                 )}
               </div>
             ))}
@@ -291,7 +290,7 @@ const HomePage = () => {
               <button
                 onClick={() => setPricingAnnual(!pricingAnnual)}
                 className={`w-14 h-7 rounded-full relative transition-colors ${
-                  pricingAnnual ? 'bg-sky-500' : 'bg-gray-300'
+                  pricingAnnual ? 'bg-primary-bright' : 'bg-gray-300'
                 }`}
               >
                 <div
@@ -311,9 +310,9 @@ const HomePage = () => {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {pricingPlans.map((plan, index) => (
-              <Card key={index} className={`glass-card relative ${plan.popular ? 'ring-2 ring-sky-500' : ''}`}>
+              <Card key={index} className={`glass-card relative ${plan.popular ? 'ring-2 ring-primary-bright' : ''}`}>
                 {plan.popular && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-sky-500 text-white">
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary-bright text-white">
                     Most Popular
                   </Badge>
                 )}
@@ -339,8 +338,8 @@ const HomePage = () => {
                   </ul>
 
                   <Button 
-                    className="w-full bg-sky-500 hover:bg-sky-600 text-white"
-                    variant="default"
+                    className={`w-full ${plan.popular ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-500 hover:bg-sky-600'}`}
+                    variant={plan.popular ? 'default' : 'default'}
                   >
                     Get Started
                   </Button>
@@ -352,7 +351,7 @@ const HomePage = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 bg-gradient-to-r from-sky-500 to-sky-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Stay Updated with Senior Care Insights
@@ -369,7 +368,7 @@ const HomePage = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="bg-white text-text-primary"
             />
-            <Button className="bg-neon-red hover:bg-neon-red-dark text-white">
+            <Button className="bg-sky-500 hover:bg-sky-600 text-white">
               Subscribe
             </Button>
           </div>
@@ -395,10 +394,10 @@ const HomePage = () => {
             <div className="grid md:grid-cols-3 gap-8">
               <Card className="glass-card text-center">
                 <CardContent className="p-6">
-                  <Phone className="h-12 w-12 text-sky-500 mx-auto mb-4" />
+                  <Phone className="h-12 w-12 text-primary-bright mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-text-primary mb-2">Call Us</h3>
                   <p className="text-text-secondary">
-                    <a href="tel:1-623-300-2065" className="hover:text-sky-500">
+                    <a href="tel:1-623-300-2065" className="hover:text-primary-bright">
                       1 (623) 300-2065
                     </a>
                   </p>
@@ -407,10 +406,10 @@ const HomePage = () => {
 
               <Card className="glass-card text-center">
                 <CardContent className="p-6">
-                  <Mail className="h-12 w-12 text-sky-500 mx-auto mb-4" />
+                  <Mail className="h-12 w-12 text-primary-bright mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-text-primary mb-2">Email Us</h3>
                   <p className="text-text-secondary">
-                    <a href="mailto:contact@healthproassist.com" className="hover:text-sky-500">
+                    <a href="mailto:contact@healthproassist.com" className="hover:text-primary-bright">
                       contact@healthproassist.com
                     </a>
                   </p>
@@ -419,7 +418,7 @@ const HomePage = () => {
 
               <Card className="glass-card text-center">
                 <CardContent className="p-6">
-                  <MapPin className="h-12 w-12 text-sky-500 mx-auto mb-4" />
+                  <MapPin className="h-12 w-12 text-primary-bright mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-text-primary mb-2">Visit Us</h3>
                   <p className="text-text-secondary">
                     Nationwide Service<br />
