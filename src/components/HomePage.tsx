@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -19,6 +18,7 @@ import {
   Search
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ParallaxDivider from './ParallaxDivider';
 
 const HomePage = () => {
   const [pricingAnnual, setPricingAnnual] = useState(true);
@@ -117,31 +117,31 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="hero-gradient pt-24 pb-16 text-white">
-        <div className="container mx-auto px-4">
+      <section className="hero-gradient pt-24 pb-16 text-white relative">
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
-            <Badge className="mb-6 bg-white/20 text-white border-white/30">
+            <Badge className="mb-6 bg-white/20 text-white border-white/30 backdrop-blur-sm">
               Powered by AI • Trusted by Families
             </Badge>
             
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-glow">
               Find the Perfect Senior Care with
-              <span className="block text-secondary-soft">AI-Powered Matching</span>
+              <span className="block text-white/90">AI-Powered Matching</span>
             </h1>
             
-            <p className="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed">
+            <p className="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed text-shadow">
               Meet AVA, your personal AI assistant who understands veteran and civilian care needs. 
               Get matched with vetted facilities in minutes, not weeks.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Button size="lg" asChild className="bg-accent-patriotic hover:bg-accent-patriotic/90 text-white px-8 py-4 text-lg">
+              <Button size="lg" asChild className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 text-lg shadow-2xl">
                 <Link to="/find-care">
                   <Search className="mr-2 h-5 w-5" />
                   Start Your Search
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-dark px-8 py-4 text-lg">
+              <Button size="lg" variant="outline" className="border-white bg-white text-gray-900 hover:bg-gray-100 px-8 py-4 text-lg shadow-2xl">
                 Meet AVA
               </Button>
             </div>
@@ -149,21 +149,24 @@ const HomePage = () => {
             {/* Hero Stats */}
             <div className="grid md:grid-cols-3 gap-8 mt-16">
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">10,000+</div>
+                <div className="text-3xl font-bold mb-2 text-glow">10,000+</div>
                 <div className="text-white/80">Verified Facilities</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">98%</div>
+                <div className="text-3xl font-bold mb-2 text-glow">98%</div>
                 <div className="text-white/80">Match Success Rate</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">24/7</div>
+                <div className="text-3xl font-bold mb-2 text-glow">24/7</div>
                 <div className="text-white/80">AVA Availability</div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Parallax Divider */}
+      <ParallaxDivider />
 
       {/* Features Section */}
       <section className="py-16 bg-white">
@@ -193,6 +196,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Parallax Divider */}
+      <ParallaxDivider />
 
       {/* AVA's Process Section */}
       <section className="py-16 bg-surface-soft">
@@ -226,6 +232,9 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Parallax Divider */}
+      <ParallaxDivider />
+
       {/* Testimonials Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
@@ -258,6 +267,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Parallax Divider */}
+      <ParallaxDivider />
 
       {/* Pricing Section */}
       <section className="py-16 bg-surface-soft">
@@ -339,7 +351,7 @@ const HomePage = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 bg-primary-dark text-white">
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Stay Updated with Senior Care Insights
@@ -362,6 +374,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Parallax Divider */}
+      <ParallaxDivider />
 
       {/* Contact Section */}
       <section className="py-16 bg-white">
