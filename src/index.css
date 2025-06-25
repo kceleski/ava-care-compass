@@ -1,60 +1,48 @@
 @tailwind base;
-@layer utilities {
-  .header {
-    @apply bg-header-background text-header-foreground;
-  }
-}
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --header-background: #ffffff; /* White header background */
-    --foreground-color: #0f172b; /* Dark header text */
-    --card-background: #ffffff;
+    --foreground: 222.2 84% 4.9%;
+    --header-background: 0 0% 100%; /* White header background */
+    --header-foreground: 222.2 84% 4.9%; /* Dark header text */
+
     --card: 0 0% 100%;
-    --card-foreground: #0f172b;
-    --popover-background-color: #ffffff;
+    --card-foreground: 222.2 84% 4.9%;
+
     --popover: 0 0% 100%;
-    --popover-foreground-color: #0f172b;
-    --primary-color: #2e86de;
+    --popover-foreground: 222.2 84% 4.9%;
+
     --primary: 200 70% 50%; /* Brighter, more vibrant primary */
-    --primary-foreground-color: #f5faff;
-    --secondary-color: #e0f2fe;
+    --primary-foreground: 210 40% 98%;
+
     --secondary: 210 50% 90%; /* Softer, higher contrast secondary */
-    --secondary-foreground-color: #1e3a8a;
-    --muted-color: #f5faff;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
     --muted: 210 40% 96.1%;
-    --muted-foreground-color: #64748b;
-    --accent-color: #99f6e4;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
     --accent: 180 60% 85%; /* Popping accent for buttons/CTAs */
-    --accent-foreground-color: #1e3a8a;
-    --destructive-color: #f87171;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground-color: #f5faff;
-    --border-color: #e2e8f0;
+    --destructive-foreground: 210 40% 98%;
+
     --border: 214.3 31.8% 91.4%;
-    --input-color: #e2e8f0;
     --input: 214.3 31.8% 91.4%;
-    --ring-color: #0f172b;
     --ring: 222.2 84% 4.9%;
+
     --radius: 0.5rem;
-    --sidebar-background-color: #fafafa;
+
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground-color: #3f4a66;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary-color: #1e3a8a;
     --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground-color: #fafafa;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent-color: #eff6ff;
     --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground-color: #1e3a8a;
     --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border-color: #e5e7eb;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring-color: #3b82f6;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -120,10 +108,6 @@
   
   .service-gradient {
     background: linear-gradient(135deg, #6ee7b7 0%, #3b82f6 100%); /* Fresher service gradient */
-  }
-
-  .header {
-    @apply bg-header-background text-header-foreground shadow-sm; /* Force white header with dark text */
   }
 }
 
