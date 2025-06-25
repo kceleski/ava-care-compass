@@ -26,42 +26,42 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: '#0ea5e9', // Sky blue
-					bright: '#0ea5e9',
-					dark: '#0284c7',
+					DEFAULT: '#457b9d',
+					bright: '#457b9d',
+					dark: '#1D3557',
 					foreground: '#FFFFFF'
 				},
 				secondary: {
-					DEFAULT: '#e0f2fe', // Light sky blue
-					soft: '#e0f2fe',
-					foreground: '#1e293b'
+					DEFAULT: '#A8DADC',
+					soft: '#A8DADC',
+					foreground: '#1D3557'
 				},
 				accent: {
-					DEFAULT: '#ef4444', // Neon red
-					patriotic: '#ef4444',
+					DEFAULT: '#E63946',
+					patriotic: '#E63946',
 					foreground: '#FFFFFF'
 				},
 				success: {
-					DEFAULT: '#22c55e',
+					DEFAULT: '#4CAF50',
 					foreground: '#FFFFFF'
 				},
 				warning: {
-					DEFAULT: '#f59e0b',
+					DEFAULT: '#FF9800',
 					foreground: '#FFFFFF'
 				},
 				surface: {
-					DEFAULT: '#f8fafc',
-					soft: '#f8fafc'
+					DEFAULT: '#F3F4F6',
+					soft: '#F3F4F6'
 				},
 				border: {
-					DEFAULT: '#e2e8f0',
-					subtle: '#e2e8f0'
+					DEFAULT: '#E5E7EB',
+					subtle: '#E5E7EB'
 				},
 				text: {
-					primary: '#1e293b',
-					secondary: '#64748b'
+					primary: '#111827',
+					secondary: '#6B7280'
 				},
-				disabled: '#cbd5e1',
+				disabled: '#D1D5DB',
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'

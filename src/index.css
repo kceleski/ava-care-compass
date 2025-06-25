@@ -14,16 +14,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 200 70% 50%; /* Sky blue primary */
+    --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 50% 90%; /* Softer, higher contrast secondary */
+    --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 0 84% 60%; /* Neon red accent */
+    --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -55,16 +55,16 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 200 70% 60%; /* Sky blue for dark mode */
+    --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 217.2 40% 25%; /* Darker secondary for contrast */
+    --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 0 84% 65%; /* Slightly adjusted neon red for dark mode */
+    --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -96,54 +96,15 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/95 backdrop-blur-md border border-white/30 shadow-xl;
-    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15), 0 0 20px rgba(239, 68, 68, 0.1);
+    @apply bg-white/80 backdrop-blur-sm border border-border-subtle shadow-lg;
   }
   
   .hero-gradient {
-    background: linear-gradient(135deg, #0ea5e9 0%, #ef4444 100%);
-    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3), 0 0 20px rgba(239, 68, 68, 0.2);
+    background: linear-gradient(135deg, #457b9d 0%, #1D3557 100%);
   }
   
   .service-gradient {
-    background: linear-gradient(135deg, #0ea5e9 0%, #ef4444 100%);
-    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4), 0 0 15px rgba(239, 68, 68, 0.3);
-  }
-  
-  .header-glass {
-    @apply bg-white/98 backdrop-blur-lg border-b border-white/40;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 16px rgba(14, 165, 233, 0.1), 0 0 10px rgba(239, 68, 68, 0.05);
-  }
-  
-  .vibrant-card {
-    @apply bg-white/95 backdrop-blur-sm border border-white/40 shadow-2xl;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 20px rgba(14, 165, 233, 0.1), 0 0 10px rgba(239, 68, 68, 0.05);
-    transition: all 0.3s ease;
-  }
-  
-  .vibrant-card:hover {
-    @apply scale-105;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12), 0 0 30px rgba(14, 165, 233, 0.2), 0 0 15px rgba(239, 68, 68, 0.1);
-  }
-  
-  .glow-button {
-    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4), 0 0 20px rgba(14, 165, 233, 0.2);
-    transition: all 0.3s ease;
-  }
-  
-  .glow-button:hover {
-    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6), 0 0 30px rgba(14, 165, 233, 0.3);
-    transform: translateY(-2px);
-  }
-  
-  .glow-button-accent {
-    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4), 0 0 20px rgba(239, 68, 68, 0.2);
-    transition: all 0.3s ease;
-  }
-  
-  .glow-button-accent:hover {
-    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6), 0 0 30px rgba(239, 68, 68, 0.3);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #A8DADC 0%, #457b9d 100%);
   }
 }
 
@@ -154,40 +115,5 @@
   
   .animate-zoom-in {
     animation: zoom-in 0.4s ease-out;
-  }
-  
-  .text-glow {
-    text-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
-  }
-  
-  .text-glow-accent {
-    text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
-  }
-  
-  .border-glow {
-    border: 1px solid rgba(14, 165, 233, 0.3);
-    box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
-  }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes zoom-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }

@@ -17,13 +17,13 @@ interface ResourceCardProps {
 const ResourceCard = ({ title, description, type, tag, icon, onView }: ResourceCardProps) => {
   const getTagColor = (tag: string) => {
     switch (tag) {
-      case 'Essential': return 'bg-gradient-to-r from-accent-patriotic to-red-500 text-white shadow-lg';
-      case 'Popular': return 'bg-gradient-to-r from-primary-bright to-blue-500 text-white shadow-lg';
-      case 'Expert': return 'bg-gradient-to-r from-primary-dark to-indigo-600 text-white shadow-lg';
-      case 'Free': return 'bg-gradient-to-r from-success to-green-500 text-white shadow-lg';
-      case 'New': return 'bg-gradient-to-r from-warning to-orange-500 text-white shadow-lg';
-      case 'Local': return 'bg-gradient-to-r from-secondary-soft to-cyan-400 text-text-primary shadow-lg';
-      default: return 'bg-gradient-to-r from-surface-soft to-gray-300 text-text-secondary shadow-lg';
+      case 'Essential': return 'bg-accent-patriotic text-white';
+      case 'Popular': return 'bg-primary-bright text-white';
+      case 'Expert': return 'bg-primary-dark text-white';
+      case 'Free': return 'bg-success text-white';
+      case 'New': return 'bg-warning text-white';
+      case 'Local': return 'bg-secondary-soft text-text-primary';
+      default: return 'bg-surface-soft text-text-secondary';
     }
   };
 
@@ -43,14 +43,14 @@ const ResourceCard = ({ title, description, type, tag, icon, onView }: ResourceC
   };
 
   return (
-    <Card className="vibrant-card group cursor-pointer">
+    <Card className="hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer group">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <CardTitle className="text-lg text-text-primary group-hover:text-primary-bright group-hover:text-glow transition-all">
+            <CardTitle className="text-lg group-hover:text-primary-bright transition-colors">
               {title}
             </CardTitle>
-            <CardDescription className="mt-1 text-text-secondary">{description}</CardDescription>
+            <CardDescription className="mt-1">{description}</CardDescription>
           </div>
           <Badge className={getTagColor(tag)} variant="secondary">
             {tag}
@@ -67,7 +67,7 @@ const ResourceCard = ({ title, description, type, tag, icon, onView }: ResourceC
             size="sm" 
             variant="outline"
             onClick={onView}
-            className="opacity-0 group-hover:opacity-100 transition-all border-glow hover:bg-primary-bright hover:text-white text-text-primary glow-button"
+            className="opacity-0 group-hover:opacity-100 transition-opacity"
           >
             View
           </Button>
