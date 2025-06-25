@@ -47,10 +47,10 @@ const ResourceCard = ({ title, description, type, tag, icon, onView }: ResourceC
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <CardTitle className="text-lg group-hover:text-primary-bright group-hover:text-glow transition-all">
+            <CardTitle className="text-lg text-text-primary group-hover:text-primary-bright group-hover:text-glow transition-all">
               {title}
             </CardTitle>
-            <CardDescription className="mt-1">{description}</CardDescription>
+            <CardDescription className="mt-1 text-text-secondary">{description}</CardDescription>
           </div>
           <Badge className={getTagColor(tag)} variant="secondary">
             {tag}
@@ -67,7 +67,7 @@ const ResourceCard = ({ title, description, type, tag, icon, onView }: ResourceC
             size="sm" 
             variant="outline"
             onClick={onView}
-            className="opacity-0 group-hover:opacity-100 transition-all border-glow hover:bg-primary-bright hover:text-white glow-button"
+            className="opacity-0 group-hover:opacity-100 transition-all border-glow hover:bg-primary-bright hover:text-white text-text-primary glow-button"
           >
             View
           </Button>

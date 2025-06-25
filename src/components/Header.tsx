@@ -69,10 +69,10 @@ const Header = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" asChild className="hover:bg-primary-bright/10 hover:text-primary-bright">
+            <Button variant="ghost" asChild className="text-text-primary hover:bg-primary-bright/10 hover:text-primary-bright">
               <Link to="/login">Login</Link>
             </Button>
-            <Button asChild className="bg-primary-bright hover:bg-primary-dark glow-button">
+            <Button asChild className="bg-accent-patriotic hover:bg-accent-patriotic/90 text-white glow-button-accent">
               <Link to="/register">Sign Up</Link>
             </Button>
           </div>
@@ -81,7 +81,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden hover:bg-primary-bright/10"
+            className="md:hidden text-text-primary hover:bg-primary-bright/10"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -128,10 +128,10 @@ const Header = () => {
                 Advertise
               </Link>
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="ghost" asChild className="hover:bg-primary-bright/10">
+                <Button variant="ghost" asChild className="text-text-primary hover:bg-primary-bright/10">
                   <Link to="/login" onClick={() => setIsMenuOpen(false)}>Login</Link>
                 </Button>
-                <Button asChild className="bg-primary-bright hover:bg-primary-dark glow-button">
+                <Button asChild className="bg-accent-patriotic hover:bg-accent-patriotic/90 text-white glow-button-accent">
                   <Link to="/register" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
                 </Button>
               </div>
