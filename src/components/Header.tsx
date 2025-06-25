@@ -11,7 +11,7 @@ const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md border-b">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -27,40 +27,40 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-8">
             <Link 
               to="/" 
-              className={`text-sm font-medium transition-colors hover:text-primary-red ${
-                isActive('/') ? 'text-primary-red' : 'text-text-primary'
+              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                isActive('/') ? 'text-blue-600' : 'text-gray-700'
               }`}
             >
               Home
             </Link>
             <Link 
               to="/find-care" 
-              className={`text-sm font-medium transition-colors hover:text-primary-red ${
-                isActive('/find-care') ? 'text-primary-red' : 'text-text-primary'
+              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                isActive('/find-care') ? 'text-blue-600' : 'text-gray-700'
               }`}
             >
               Find Care
             </Link>
             <Link 
               to="/resources" 
-              className={`text-sm font-medium transition-colors hover:text-primary-red ${
-                isActive('/resources') ? 'text-primary-red' : 'text-text-primary'
+              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                isActive('/resources') ? 'text-blue-600' : 'text-gray-700'
               }`}
             >
               Resources
             </Link>
             <Link 
               to="/contact" 
-              className={`text-sm font-medium transition-colors hover:text-primary-red ${
-                isActive('/contact') ? 'text-primary-red' : 'text-text-primary'
+              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                isActive('/contact') ? 'text-blue-600' : 'text-gray-700'
               }`}
             >
               Contact Us
             </Link>
             <Link 
               to="/advertise" 
-              className={`text-sm font-medium transition-colors hover:text-primary-red ${
-                isActive('/advertise') ? 'text-primary-red' : 'text-text-primary'
+              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                isActive('/advertise') ? 'text-blue-600' : 'text-gray-700'
               }`}
             >
               Advertise
@@ -72,7 +72,7 @@ const Header = () => {
             <Button variant="ghost" asChild>
               <Link to="/login">Login</Link>
             </Button>
-            <Button asChild className="bg-primary-red hover:bg-primary-dark">
+            <Button asChild className="bg-blue-600 hover:bg-blue-700">
               <Link to="/register">Sign Up</Link>
             </Button>
           </div>
@@ -90,39 +90,39 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border-subtle">
+          <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col space-y-4">
               <Link 
                 to="/" 
-                className="text-sm font-medium text-text-primary hover:text-primary-bright"
+                className="text-sm font-medium text-gray-700 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 to="/find-care" 
-                className="text-sm font-medium text-text-primary hover:text-primary-bright"
+                className="text-sm font-medium text-gray-700 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Find Care
               </Link>
               <Link 
                 to="/resources" 
-                className="text-sm font-medium text-text-primary hover:text-primary-bright"
+                className="text-sm font-medium text-gray-700 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Resources
               </Link>
               <Link 
                 to="/contact" 
-                className="text-sm font-medium text-text-primary hover:text-primary-bright"
+                className="text-sm font-medium text-gray-700 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact Us
               </Link>
               <Link 
                 to="/advertise" 
-                className="text-sm font-medium text-text-primary hover:text-primary-bright"
+                className="text-sm font-medium text-gray-700 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Advertise
@@ -131,7 +131,7 @@ const Header = () => {
                 <Button variant="ghost" asChild>
                   <Link to="/login" onClick={() => setIsMenuOpen(false)}>Login</Link>
                 </Button>
-                <Button asChild className="bg-primary-bright hover:bg-primary-dark">
+                <Button asChild className="bg-blue-600 hover:bg-blue-700">
                   <Link to="/register" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
                 </Button>
               </div>
