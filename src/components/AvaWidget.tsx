@@ -94,7 +94,7 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
   if (isMinimized) {
     return (
       <Button
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-primary-bright hover:bg-primary-dark shadow-lg"
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-sky-500 hover:bg-sky-600 shadow-lg"
         onClick={() => setIsMinimized(false)}
       >
         <MessageCircle className="h-6 w-6 text-white" />
@@ -148,7 +148,7 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
           <div className="flex space-x-2">
             <Button 
               size="sm" 
-              className="flex-1 text-xs bg-primary-bright hover:bg-primary-dark"
+              className="flex-1 text-xs bg-sky-500 hover:bg-sky-600 text-white"
               onClick={handleStartAssessment}
             >
               Start Assessment

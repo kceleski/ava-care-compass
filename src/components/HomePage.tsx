@@ -303,7 +303,7 @@ const HomePage = () => {
                 Annual
               </span>
               {pricingAnnual && (
-                <Badge className="ml-2 bg-success text-white">Save 20%</Badge>
+                <Badge className="ml-2 bg-sky-500 hover:bg-sky-600 text-white">Save 20%</Badge>
               )}
             </div>
           </div>
@@ -331,15 +331,15 @@ const HomePage = () => {
                   <ul className="space-y-3 mb-8">
                     {plan.features.map((feature, i) => (
                       <li key={i} className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-success mr-3 flex-shrink-0" />
+                        <CheckCircle className="h-5 w-5 text-sky-500 mr-3 flex-shrink-0" />
                         <span className="text-text-primary">{feature}</span>
                       </li>
                     ))}
                   </ul>
 
                   <Button 
-                    className={`w-full ${plan.popular ? 'bg-primary-bright hover:bg-primary-dark' : ''}`}
-                    variant={plan.popular ? 'default' : 'outline'}
+                    className={`w-full ${plan.popular ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-500 hover:bg-sky-600'}`}
+                    variant={plan.popular ? 'default' : 'default'}
                   >
                     Get Started
                   </Button>
@@ -368,7 +368,7 @@ const HomePage = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="bg-white text-text-primary"
             />
-            <Button className="bg-accent-patriotic hover:bg-accent-patriotic/90 text-white">
+            <Button className="bg-sky-500 hover:bg-sky-600 text-white">
               Subscribe
             </Button>
           </div>

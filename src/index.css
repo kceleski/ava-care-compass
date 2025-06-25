@@ -133,43 +133,60 @@
     background: linear-gradient(45deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
   }
 
-  .floating-element {
+  .data-stream {
     position: absolute;
-    border-radius: 50%;
-    background: linear-gradient(45deg, rgba(14, 165, 233, 0.1), rgba(239, 68, 68, 0.1));
-    animation: float-random 8s ease-in-out infinite;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(14, 165, 233, 0.8), transparent);
+    animation: stream-flow 3s linear infinite;
   }
 
-  .floating-element:nth-child(1) {
-    width: 60px;
-    height: 60px;
-    top: 20%;
+  .data-stream:nth-child(1) {
     left: 10%;
+    height: 100px;
     animation-delay: 0s;
   }
 
-  .floating-element:nth-child(2) {
-    width: 40px;
-    height: 40px;
-    top: 60%;
-    left: 80%;
+  .data-stream:nth-child(2) {
+    left: 25%;
+    height: 120px;
+    animation-delay: -0.5s;
+  }
+
+  .data-stream:nth-child(3) {
+    left: 40%;
+    height: 80px;
+    animation-delay: -1s;
+  }
+
+  .data-stream:nth-child(4) {
+    left: 55%;
+    height: 110px;
+    animation-delay: -1.5s;
+  }
+
+  .data-stream:nth-child(5) {
+    left: 70%;
+    height: 90px;
     animation-delay: -2s;
   }
 
-  .floating-element:nth-child(3) {
-    width: 80px;
-    height: 80px;
-    top: 40%;
-    left: 60%;
-    animation-delay: -4s;
+  .data-stream:nth-child(6) {
+    left: 85%;
+    height: 130px;
+    animation-delay: -2.5s;
   }
 
-  .floating-element:nth-child(4) {
-    width: 30px;
-    height: 30px;
-    top: 80%;
-    left: 30%;
-    animation-delay: -6s;
+  .data-stream::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: rgba(14, 165, 233, 1);
+    border-radius: 50%;
+    animation: data-pulse 2s ease-in-out infinite;
   }
 }
 
@@ -189,6 +206,22 @@
   .text-glow {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   }
+
+  .bg-sky-blue {
+    background-color: #0ea5e9;
+  }
+
+  .hover\:bg-sky-blue-dark:hover {
+    background-color: #0284c7;
+  }
+
+  .bg-sky-500 {
+    background-color: #0ea5e9;
+  }
+
+  .hover\:bg-sky-600:hover {
+    background-color: #0284c7;
+  }
 }
 
 @keyframes float {
@@ -203,17 +236,31 @@
   }
 }
 
-@keyframes float-random {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px) rotate(0deg);
+@keyframes stream-flow {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
   }
-  25% {
-    transform: translateY(-20px) translateX(10px) rotate(90deg);
+  10% {
+    opacity: 1;
   }
-  50% {
-    transform: translateY(-10px) translateX(-15px) rotate(180deg);
+  90% {
+    opacity: 1;
   }
-  75% {
-    transform: translateY(-30px) translateX(5px) rotate(270deg);
+  100% {
+    transform: translateY(300px);
+    opacity: 0;
   }
 }
+
+@keyframes data-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+

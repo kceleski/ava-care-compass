@@ -4,10 +4,12 @@ import React from 'react';
 const ParallaxDivider = () => {
   return (
     <div className="parallax-divider">
-      <div className="floating-element"></div>
-      <div className="floating-element"></div>
-      <div className="floating-element"></div>
-      <div className="floating-element"></div>
+      <div className="data-stream"></div>
+      <div className="data-stream"></div>
+      <div className="data-stream"></div>
+      <div className="data-stream"></div>
+      <div className="data-stream"></div>
+      <div className="data-stream"></div>
       
       {/* Wave effect */}
       <div className="absolute bottom-0 left-0 w-full">
