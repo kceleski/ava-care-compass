@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -21,7 +22,6 @@ import { Link } from 'react-router-dom';
 import ParallaxDivider from './ParallaxDivider';
 
 const HomePage = () => {
-  const [pricingAnnual, setPricingAnnual] = useState(true);
   const [email, setEmail] = useState('');
 
   const features = [
@@ -70,7 +70,7 @@ const HomePage = () => {
     {
       name: "Michael Chen",
       role: "Professional Agent",
-      content: "As a care placement professional, HealthProAssist has revolutionized how I serve my clients. The Pro tier features save me hours every week.",
+      content: "As a care placement professional, HealthProAssist has revolutionized how I serve my clients. The advanced features save me hours every week.",
       rating: 5
     },
     {
@@ -78,39 +78,6 @@ const HomePage = () => {
       role: "Army Veteran",
       content: "Finally, a service that understands veteran needs. They helped me find a facility that accepts VA benefits and feels like home.",
       rating: 5
-    }
-  ];
-
-  const pricingPlans = [
-    {
-      name: "Basic",
-      description: "Perfect for individuals getting started",
-      monthlyPrice: 29,
-      annualPrice: 290,
-      features: [
-        "Basic facility search",
-        "Limited AVA interactions",
-        "Email support",
-        "Recent 6 facility cards",
-        "Basic profile management"
-      ]
-    },
-    {
-      name: "Pro",
-      description: "Advanced tools for professionals",
-      monthlyPrice: 99,
-      annualPrice: 990,
-      features: [
-        "Advanced facility search & filters",
-        "Unlimited AVA interactions",
-        "Phone-based client creation",
-        "Google Maps integration",
-        "Facility contact management",
-        "Calendar & appointment scheduling",
-        "Analytics & reporting",
-        "Priority support"
-      ],
-      popular: true
     }
   ];
 
@@ -216,7 +183,7 @@ const HomePage = () => {
           <div className="max-w-4xl mx-auto">
             {steps.map((step, index) => (
               <div key={index} className="flex items-start mb-12 last:mb-0 animate-fade-in">
-                <div className="flex-shrink-0 w-16 h-16 bg-primary-bright rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6 shadow-lg">
                   {step.number}
                 </div>
                 <div className="flex-grow">
@@ -224,7 +191,7 @@ const HomePage = () => {
                   <p className="text-lg text-text-secondary">{step.description}</p>
                 </div>
                 {index < steps.length - 1 && (
-                  <ArrowRight className="h-6 w-6 text-primary-bright mt-4 ml-6 hidden md:block" />
+                  <ArrowRight className="h-6 w-6 text-red-500 mt-4 ml-6 hidden md:block" />
                 )}
               </div>
             ))}
@@ -261,88 +228,6 @@ const HomePage = () => {
                     <div className="font-semibold text-text-primary">{testimonial.name}</div>
                     <div className="text-sm text-text-secondary">{testimonial.role}</div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Parallax Divider */}
-      <ParallaxDivider />
-
-      {/* Pricing Section */}
-      <section className="py-16 bg-surface-soft">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">
-              Choose Your Plan
-            </h2>
-            <p className="text-xl text-text-secondary mb-8">
-              Flexible pricing for individuals and professionals
-            </p>
-
-            {/* Pricing Toggle */}
-            <div className="flex items-center justify-center mb-8">
-              <span className={`mr-3 ${!pricingAnnual ? 'text-text-primary font-semibold' : 'text-text-secondary'}`}>
-                Monthly
-              </span>
-              <button
-                onClick={() => setPricingAnnual(!pricingAnnual)}
-                className={`w-14 h-7 rounded-full relative transition-colors ${
-                  pricingAnnual ? 'bg-primary-bright' : 'bg-gray-300'
-                }`}
-              >
-                <div
-                  className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform ${
-                    pricingAnnual ? 'transform translate-x-8' : 'transform translate-x-1'
-                  }`}
-                />
-              </button>
-              <span className={`ml-3 ${pricingAnnual ? 'text-text-primary font-semibold' : 'text-text-secondary'}`}>
-                Annual
-              </span>
-              {pricingAnnual && (
-                <Badge className="ml-2 bg-sky-500 hover:bg-sky-600 text-white">Save 20%</Badge>
-              )}
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {pricingPlans.map((plan, index) => (
-              <Card key={index} className={`glass-card relative ${plan.popular ? 'ring-2 ring-primary-bright' : ''}`}>
-                {plan.popular && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary-bright text-white">
-                    Most Popular
-                  </Badge>
-                )}
-                <CardContent className="p-8">
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold text-text-primary mb-2">{plan.name}</h3>
-                    <p className="text-text-secondary mb-4">{plan.description}</p>
-                    <div className="text-4xl font-bold text-text-primary">
-                      ${pricingAnnual ? plan.annualPrice : plan.monthlyPrice}
-                      <span className="text-lg text-text-secondary font-normal">
-                        /{pricingAnnual ? 'year' : 'month'}
-                      </span>
-                    </div>
-                  </div>
-
-                  <ul className="space-y-3 mb-8">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-sky-500 mr-3 flex-shrink-0" />
-                        <span className="text-text-primary">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Button 
-                    className={`w-full ${plan.popular ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-500 hover:bg-sky-600'}`}
-                    variant={plan.popular ? 'default' : 'default'}
-                  >
-                    Get Started
-                  </Button>
                 </CardContent>
               </Card>
             ))}
