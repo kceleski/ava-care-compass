@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -20,6 +19,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ParallaxDivider from './ParallaxDivider';
+import FeedbackSystem from './FeedbackSystem';
 
 const HomePage = () => {
   const [email, setEmail] = useState('');
@@ -231,6 +231,15 @@ const HomePage = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Feedback Section */}
+      <section className="py-16 bg-surface-soft">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <FeedbackSystem />
           </div>
         </div>
       </section>

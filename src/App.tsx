@@ -14,6 +14,7 @@ import TermsPage from "./components/TermsPage";
 import ResourcesPage from "./components/ResourcesPage";
 import AdvertisePage from "./components/AdvertisePage";
 import LoginPage from "./components/LoginPage";
+import InteractionStyles from "./components/InteractionStyles";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <InteractionStyles />
         <BrowserRouter>
           <div className="min-h-screen flex flex-col">
             <Header />
