@@ -7,20 +7,24 @@ import { Heart, Shield, Users, Star, CheckCircle, ArrowRight, Phone, Mail, MapPi
 import { Link } from 'react-router-dom';
 import ParallaxDivider from './ParallaxDivider';
 import FeedbackSystem from './FeedbackSystem';
+
 const HomePage = () => {
   const [email, setEmail] = useState('');
   const features = [{
     icon: Heart,
     title: "AI-Powered Matching",
-    description: "AVA uses advanced AI to match seniors with the perfect care facilities based on their unique needs and preferences."
+    description: "AVA uses advanced AI to match seniors with the perfect care facilities based on their unique needs and preferences.",
+    color: "from-pink-500 to-rose-500"
   }, {
     icon: Shield,
     title: "Veteran-Focused Care",
-    description: "Specialized support for veterans with access to VA benefits and military-friendly care facilities."
+    description: "Specialized support for veterans with access to VA benefits and military-friendly care facilities.",
+    color: "from-blue-500 to-indigo-500"
   }, {
     icon: Users,
     title: "Professional Network",
-    description: "Connect with certified care placement professionals who understand your local market and needs."
+    description: "Connect with certified care placement professionals who understand your local market and needs.",
+    color: "from-emerald-500 to-teal-500"
   }];
   const steps = [{
     number: "01",
@@ -118,10 +122,11 @@ const HomePage = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 animate-fade-in">
-            {features.map((feature, index) => <Card key={index} className="glass-card hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 bg-primary-bright/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <feature.icon className="h-8 w-8 text-primary-bright" />
+            {features.map((feature, index) => <Card key={index} className="relative overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 border-0 shadow-lg">
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-10`}></div>
+                <CardContent className="p-6 text-center relative z-10 bg-white/95 backdrop-blur-sm">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                    <feature.icon className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold text-text-primary mb-3">{feature.title}</h3>
                   <p className="text-text-secondary">{feature.description}</p>
