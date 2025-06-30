@@ -3,88 +3,57 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { 
-  Heart, 
-  Shield, 
-  Users, 
-  Star, 
-  CheckCircle, 
-  ArrowRight, 
-  Phone, 
-  Mail, 
-  MapPin,
-  Award,
-  Clock,
-  Search
-} from 'lucide-react';
+import { Heart, Shield, Users, Star, CheckCircle, ArrowRight, Phone, Mail, MapPin, Award, Clock, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ParallaxDivider from './ParallaxDivider';
 import FeedbackSystem from './FeedbackSystem';
-
 const HomePage = () => {
   const [email, setEmail] = useState('');
-
-  const features = [
-    {
-      icon: Heart,
-      title: "AI-Powered Matching",
-      description: "AVA uses advanced AI to match seniors with the perfect care facilities based on their unique needs and preferences."
-    },
-    {
-      icon: Shield,
-      title: "Veteran-Focused Care",
-      description: "Specialized support for veterans with access to VA benefits and military-friendly care facilities."
-    },
-    {
-      icon: Users,
-      title: "Professional Network",
-      description: "Connect with certified care placement professionals who understand your local market and needs."
-    }
-  ];
-
-  const steps = [
-    {
-      number: "01",
-      title: "Tell AVA Your Needs",
-      description: "Share your care requirements, preferences, and budget with our AI assistant AVA."
-    },
-    {
-      number: "02", 
-      title: "Get Matched",
-      description: "AVA analyzes thousands of facilities to find the best matches for your specific situation."
-    },
-    {
-      number: "03",
-      title: "Connect & Tour", 
-      description: "Schedule virtual or in-person tours with your top matches and make an informed decision."
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "Daughter & Caregiver",
-      content: "AVA helped us find the perfect memory care facility for my father. The process was seamless and the staff was incredibly supportive.",
-      rating: 5
-    },
-    {
-      name: "Michael Chen",
-      role: "Professional Agent",
-      content: "As a care placement professional, HealthProAssist has revolutionized how I serve my clients. The advanced features save me hours every week.",
-      rating: 5
-    },
-    {
-      name: "Robert Martinez",
-      role: "Army Veteran",
-      content: "Finally, a service that understands veteran needs. They helped me find a facility that accepts VA benefits and feels like home.",
-      rating: 5
-    }
-  ];
-
-  return (
-    <div className="min-h-screen">
+  const features = [{
+    icon: Heart,
+    title: "AI-Powered Matching",
+    description: "AVA uses advanced AI to match seniors with the perfect care facilities based on their unique needs and preferences."
+  }, {
+    icon: Shield,
+    title: "Veteran-Focused Care",
+    description: "Specialized support for veterans with access to VA benefits and military-friendly care facilities."
+  }, {
+    icon: Users,
+    title: "Professional Network",
+    description: "Connect with certified care placement professionals who understand your local market and needs."
+  }];
+  const steps = [{
+    number: "01",
+    title: "Tell AVA Your Needs",
+    description: "Share your care requirements, preferences, and budget with our AI assistant AVA."
+  }, {
+    number: "02",
+    title: "Get Matched",
+    description: "AVA analyzes thousands of facilities to find the best matches for your specific situation."
+  }, {
+    number: "03",
+    title: "Connect & Tour",
+    description: "Schedule virtual or in-person tours with your top matches and make an informed decision."
+  }];
+  const testimonials = [{
+    name: "Sarah Johnson",
+    role: "Daughter & Caregiver",
+    content: "AVA helped us find the perfect memory care facility for my father. The process was seamless and the staff was incredibly supportive.",
+    rating: 5
+  }, {
+    name: "Michael Chen",
+    role: "Professional Agent",
+    content: "As a care placement professional, HealthProAssist has revolutionized how I serve my clients. The advanced features save me hours every week.",
+    rating: 5
+  }, {
+    name: "Robert Martinez",
+    role: "Army Veteran",
+    content: "Finally, a service that understands veteran needs. They helped me find a facility that accepts VA benefits and feels like home.",
+    rating: 5
+  }];
+  return <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="hero-gradient pt-24 pb-16 text-white relative">
+      <section className="hero-gradient pt-24 pb-16 text-white relative bg-sky-700">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <Badge className="mb-6 bg-white/20 text-white border-white/30 backdrop-blur-sm">
@@ -149,8 +118,7 @@ const HomePage = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 animate-fade-in">
-            {features.map((feature, index) => (
-              <Card key={index} className="glass-card hover:shadow-xl transition-shadow duration-300">
+            {features.map((feature, index) => <Card key={index} className="glass-card hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-6 text-center">
                   <div className="w-16 h-16 bg-primary-bright/10 rounded-full flex items-center justify-center mx-auto mb-4">
                     <feature.icon className="h-8 w-8 text-primary-bright" />
@@ -158,8 +126,7 @@ const HomePage = () => {
                   <h3 className="text-xl font-semibold text-text-primary mb-3">{feature.title}</h3>
                   <p className="text-text-secondary">{feature.description}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -181,8 +148,7 @@ const HomePage = () => {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            {steps.map((step, index) => (
-              <div key={index} className="flex items-start mb-12 last:mb-0 animate-fade-in">
+            {steps.map((step, index) => <div key={index} className="flex items-start mb-12 last:mb-0 animate-fade-in">
                 <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6 shadow-lg">
                   {step.number}
                 </div>
@@ -190,11 +156,8 @@ const HomePage = () => {
                   <h3 className="text-2xl font-semibold text-text-primary mb-3">{step.title}</h3>
                   <p className="text-lg text-text-secondary">{step.description}</p>
                 </div>
-                {index < steps.length - 1 && (
-                  <ArrowRight className="h-6 w-6 text-red-500 mt-4 ml-6 hidden md:block" />
-                )}
-              </div>
-            ))}
+                {index < steps.length - 1 && <ArrowRight className="h-6 w-6 text-red-500 mt-4 ml-6 hidden md:block" />}
+              </div>)}
           </div>
         </div>
       </section>
@@ -215,13 +178,10 @@ const HomePage = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="glass-card">
+            {testimonials.map((testimonial, index) => <Card key={index} className="glass-card">
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-warning fill-current" />
-                    ))}
+                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-5 w-5 text-warning fill-current" />)}
                   </div>
                   <p className="text-text-primary mb-4 italic">"{testimonial.content}"</p>
                   <div>
@@ -229,8 +189,7 @@ const HomePage = () => {
                     <div className="text-sm text-text-secondary">{testimonial.role}</div>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -255,13 +214,7 @@ const HomePage = () => {
           </p>
 
           <div className="max-w-md mx-auto flex gap-4">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="bg-white text-text-primary"
-            />
+            <Input type="email" placeholder="Enter your email" value={email} onChange={e => setEmail(e.target.value)} className="bg-white text-text-primary" />
             <Button className="bg-sky-500 hover:bg-sky-600 text-white">
               Subscribe
             </Button>
@@ -324,8 +277,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default HomePage;
