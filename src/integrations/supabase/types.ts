@@ -9,6 +9,312 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      agencies: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          owner_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          owner_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          owner_id?: string
+        }
+        Relationships: []
+      }
+      agency_members: {
+        Row: {
+          agency_id: string
+          id: string
+          invited_at: string | null
+          joined_at: string | null
+          role: Database["public"]["Enums"]["agency_role"]
+          status: string
+          user_id: string
+        }
+        Insert: {
+          agency_id: string
+          id?: string
+          invited_at?: string | null
+          joined_at?: string | null
+          role?: Database["public"]["Enums"]["agency_role"]
+          status?: string
+          user_id: string
+        }
+        Update: {
+          agency_id?: string
+          id?: string
+          invited_at?: string | null
+          joined_at?: string | null
+          role?: Database["public"]["Enums"]["agency_role"]
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agency_members_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agent_agencies: {
+        Row: {
+          address: string | null
+          agency_name: string
+          created_at: string
+          id: string
+          phone: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          agency_name: string
+          created_at?: string
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          agency_name?: string
+          created_at?: string
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      agent_appointment_reminders: {
+        Row: {
+          appointment_id: string
+          created_at: string
+          id: string
+          sent: boolean | null
+          time_before: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          appointment_id: string
+          created_at?: string
+          id?: string
+          sent?: boolean | null
+          time_before: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          appointment_id?: string
+          created_at?: string
+          id?: string
+          sent?: boolean | null
+          time_before?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_appointment_reminders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "agent_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agent_calendar_connections: {
+        Row: {
+          access_token: string | null
+          connected: boolean | null
+          created_at: string
+          id: string
+          last_synced: string | null
+          provider: string
+          refresh_token: string | null
+          user_id: string
+        }
+        Insert: {
+          access_token?: string | null
+          connected?: boolean | null
+          created_at?: string
+          id?: string
+          last_synced?: string | null
+          provider: string
+          refresh_token?: string | null
+          user_id: string
+        }
+        Update: {
+          access_token?: string | null
+          connected?: boolean | null
+          created_at?: string
+          id?: string
+          last_synced?: string | null
+          provider?: string
+          refresh_token?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_calendar_connections_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "agent_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agent_profiles: {
+        Row: {
+          bio: string | null
+          communication_preferences: Json | null
+          headline: string | null
+          notification_preferences: Json | null
+          profile_image_url: string | null
+          service_locations: string | null
+          specializations: string | null
+          updated_at: string
+          user_id: string
+          years_experience: string | null
+        }
+        Insert: {
+          bio?: string | null
+          communication_preferences?: Json | null
+          headline?: string | null
+          notification_preferences?: Json | null
+          profile_image_url?: string | null
+          service_locations?: string | null
+          specializations?: string | null
+          updated_at?: string
+          user_id: string
+          years_experience?: string | null
+        }
+        Update: {
+          bio?: string | null
+          communication_preferences?: Json | null
+          headline?: string | null
+          notification_preferences?: Json | null
+          profile_image_url?: string | null
+          service_locations?: string | null
+          specializations?: string | null
+          updated_at?: string
+          user_id?: string
+          years_experience?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_profiles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "agent_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agent_todo_items: {
+        Row: {
+          completed: boolean | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          priority: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          priority: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          priority?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_todo_items_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "agent_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agent_users: {
+        Row: {
+          agency_id: string | null
+          created_at: string
+          email: string
+          first_name: string | null
+          id: string
+          last_name: string | null
+          phone: string | null
+          subscription_tier: string | null
+          updated_at: string
+          work_type: string | null
+        }
+        Insert: {
+          agency_id?: string | null
+          created_at?: string
+          email: string
+          first_name?: string | null
+          id: string
+          last_name?: string | null
+          phone?: string | null
+          subscription_tier?: string | null
+          updated_at?: string
+          work_type?: string | null
+        }
+        Update: {
+          agency_id?: string | null
+          created_at?: string
+          email?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          phone?: string | null
+          subscription_tier?: string | null
+          updated_at?: string
+          work_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_agency"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agent_agencies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       amenities: {
         Row: {
           category: string | null
@@ -261,6 +567,8 @@ export type Database = {
       }
       clients: {
         Row: {
+          agency_id: string | null
+          assigned_agent_id: string | null
           care_needs: string[] | null
           created_at: string | null
           diagnosis: string | null
@@ -273,6 +581,8 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          agency_id?: string | null
+          assigned_agent_id?: string | null
           care_needs?: string[] | null
           created_at?: string | null
           diagnosis?: string | null
@@ -285,6 +595,8 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          agency_id?: string | null
+          assigned_agent_id?: string | null
           care_needs?: string[] | null
           created_at?: string | null
           diagnosis?: string | null
@@ -296,10 +608,122 @@ export type Database = {
           referral_source?: string | null
           updated_at?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "clients_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "clients_assigned_agent_id_fkey"
+            columns: ["assigned_agent_id"]
+            isOneToOne: false
+            referencedRelation: "agent_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      "Combined Data": {
+        Row: {
+          accepted_payers: string | null
+          address: string | null
+          capacity: string | null
+          care_services: string | null
+          city: string | null
+          diagnoses_supported: string | null
+          email: string | null
+          "Funding Type": string | null
+          image_url: string | null
+          lat: string | null
+          license: string | null
+          lng: string | null
+          ltc: string | null
+          max_range: string | null
+          min_range: string | null
+          name: string | null
+          "Overall Star Rating": string | null
+          phone: string | null
+          "Quality Rating": string | null
+          specials: string | null
+          "Staffing Rating": string | null
+          state: string | null
+          street: string | null
+          "Survey Rating": string | null
+          tags: string | null
+          type: string | null
+          uuid: string
+          website: string | null
+          zip: number | null
+        }
+        Insert: {
+          accepted_payers?: string | null
+          address?: string | null
+          capacity?: string | null
+          care_services?: string | null
+          city?: string | null
+          diagnoses_supported?: string | null
+          email?: string | null
+          "Funding Type"?: string | null
+          image_url?: string | null
+          lat?: string | null
+          license?: string | null
+          lng?: string | null
+          ltc?: string | null
+          max_range?: string | null
+          min_range?: string | null
+          name?: string | null
+          "Overall Star Rating"?: string | null
+          phone?: string | null
+          "Quality Rating"?: string | null
+          specials?: string | null
+          "Staffing Rating"?: string | null
+          state?: string | null
+          street?: string | null
+          "Survey Rating"?: string | null
+          tags?: string | null
+          type?: string | null
+          uuid: string
+          website?: string | null
+          zip?: number | null
+        }
+        Update: {
+          accepted_payers?: string | null
+          address?: string | null
+          capacity?: string | null
+          care_services?: string | null
+          city?: string | null
+          diagnoses_supported?: string | null
+          email?: string | null
+          "Funding Type"?: string | null
+          image_url?: string | null
+          lat?: string | null
+          license?: string | null
+          lng?: string | null
+          ltc?: string | null
+          max_range?: string | null
+          min_range?: string | null
+          name?: string | null
+          "Overall Star Rating"?: string | null
+          phone?: string | null
+          "Quality Rating"?: string | null
+          specials?: string | null
+          "Staffing Rating"?: string | null
+          state?: string | null
+          street?: string | null
+          "Survey Rating"?: string | null
+          tags?: string | null
+          type?: string | null
+          uuid?: string
+          website?: string | null
+          zip?: number | null
+        }
         Relationships: []
       }
       commissions: {
         Row: {
+          agent_id: string | null
           commission_amount: number | null
           commission_status: string | null
           created_at: string | null
@@ -311,6 +735,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          agent_id?: string | null
           commission_amount?: number | null
           commission_status?: string | null
           created_at?: string | null
@@ -322,6 +747,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          agent_id?: string | null
           commission_amount?: number | null
           commission_status?: string | null
           created_at?: string | null
@@ -334,6 +760,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "commissions_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "agent_users"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "commissions_referral_id_fkey"
             columns: ["referral_id"]
             isOneToOne: false
@@ -341,6 +774,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      contacts: {
+        Row: {
+          address: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          notes: string | null
+          phone: string | null
+          source: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          source?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          source?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
       }
       contracts: {
         Row: {
@@ -586,7 +1058,6 @@ export type Database = {
           rating: number | null
           reviews_count: number | null
           state: string | null
-          storepoint_id: string | null
           subscription_end_date: string | null
           subscription_start_date: string | null
           subscription_status: string | null
@@ -625,7 +1096,6 @@ export type Database = {
           rating?: number | null
           reviews_count?: number | null
           state?: string | null
-          storepoint_id?: string | null
           subscription_end_date?: string | null
           subscription_start_date?: string | null
           subscription_status?: string | null
@@ -664,7 +1134,6 @@ export type Database = {
           rating?: number | null
           reviews_count?: number | null
           state?: string | null
-          storepoint_id?: string | null
           subscription_end_date?: string | null
           subscription_start_date?: string | null
           subscription_status?: string | null
@@ -812,6 +1281,51 @@ export type Database = {
         }
         Relationships: []
       }
+      HH_Hospice: {
+        Row: {
+          "Account Name": string | null
+          CCN: number | null
+          "External Facility Id": string
+          Phone: string | null
+          "Physical City": string | null
+          "Physical Latitude": number | null
+          "Physical Longitude": number | null
+          "Physical State/Province": string | null
+          "Physical Street": string | null
+          "Physical Zip Code": string | null
+          SubType: string | null
+          Type: string | null
+        }
+        Insert: {
+          "Account Name"?: string | null
+          CCN?: number | null
+          "External Facility Id": string
+          Phone?: string | null
+          "Physical City"?: string | null
+          "Physical Latitude"?: number | null
+          "Physical Longitude"?: number | null
+          "Physical State/Province"?: string | null
+          "Physical Street"?: string | null
+          "Physical Zip Code"?: string | null
+          SubType?: string | null
+          Type?: string | null
+        }
+        Update: {
+          "Account Name"?: string | null
+          CCN?: number | null
+          "External Facility Id"?: string
+          Phone?: string | null
+          "Physical City"?: string | null
+          "Physical Latitude"?: number | null
+          "Physical Longitude"?: number | null
+          "Physical State/Province"?: string | null
+          "Physical Street"?: string | null
+          "Physical Zip Code"?: string | null
+          SubType?: string | null
+          Type?: string | null
+        }
+        Relationships: []
+      }
       Home_Health_Providers: {
         Row: {
           Address: string | null
@@ -841,6 +1355,7 @@ export type Database = {
           "How often the home health team determined whether patients rece":
             | string
             | null
+          Medicare: boolean
           "Offers Home Health Aide Services": string | null
           "Offers Medical Social Services": string | null
           "Offers Nursing Care Services": string | null
@@ -854,6 +1369,7 @@ export type Database = {
           "Quality of patient care star rating": string | null
           State: string | null
           "Telephone Number": string | null
+          uuid: string
           "ZIP Code": number | null
         }
         Insert: {
@@ -884,6 +1400,7 @@ export type Database = {
           "How often the home health team determined whether patients rece"?:
             | string
             | null
+          Medicare?: boolean
           "Offers Home Health Aide Services"?: string | null
           "Offers Medical Social Services"?: string | null
           "Offers Nursing Care Services"?: string | null
@@ -897,6 +1414,7 @@ export type Database = {
           "Quality of patient care star rating"?: string | null
           State?: string | null
           "Telephone Number"?: string | null
+          uuid?: string
           "ZIP Code"?: number | null
         }
         Update: {
@@ -927,6 +1445,7 @@ export type Database = {
           "How often the home health team determined whether patients rece"?:
             | string
             | null
+          Medicare?: boolean
           "Offers Home Health Aide Services"?: string | null
           "Offers Medical Social Services"?: string | null
           "Offers Nursing Care Services"?: string | null
@@ -940,9 +1459,237 @@ export type Database = {
           "Quality of patient care star rating"?: string | null
           State?: string | null
           "Telephone Number"?: string | null
+          uuid?: string
           "ZIP Code"?: number | null
         }
         Relationships: []
+      }
+      "images of providers": {
+        Row: {
+          "Call to Action Text": string | null
+          City: string | null
+          "Core Services (comma-separated)": string | null
+          "CTA Button 1 Link": string | null
+          "CTA Button 1 Text": string | null
+          "CTA Button 2 Link": string | null
+          "CTA Button 2 Text": string | null
+          Description: string | null
+          Email: string | null
+          "Facility Name": string
+          "Image URL 1": string | null
+          "Image URL 2": string | null
+          "Image URL 3": string | null
+          "Lifestyle Amenities (comma-separated)": string | null
+          Phone: string | null
+          State: string | null
+          "Street Address": string | null
+          Website: string | null
+          "ZIP Code": number | null
+        }
+        Insert: {
+          "Call to Action Text"?: string | null
+          City?: string | null
+          "Core Services (comma-separated)"?: string | null
+          "CTA Button 1 Link"?: string | null
+          "CTA Button 1 Text"?: string | null
+          "CTA Button 2 Link"?: string | null
+          "CTA Button 2 Text"?: string | null
+          Description?: string | null
+          Email?: string | null
+          "Facility Name": string
+          "Image URL 1"?: string | null
+          "Image URL 2"?: string | null
+          "Image URL 3"?: string | null
+          "Lifestyle Amenities (comma-separated)"?: string | null
+          Phone?: string | null
+          State?: string | null
+          "Street Address"?: string | null
+          Website?: string | null
+          "ZIP Code"?: number | null
+        }
+        Update: {
+          "Call to Action Text"?: string | null
+          City?: string | null
+          "Core Services (comma-separated)"?: string | null
+          "CTA Button 1 Link"?: string | null
+          "CTA Button 1 Text"?: string | null
+          "CTA Button 2 Link"?: string | null
+          "CTA Button 2 Text"?: string | null
+          Description?: string | null
+          Email?: string | null
+          "Facility Name"?: string
+          "Image URL 1"?: string | null
+          "Image URL 2"?: string | null
+          "Image URL 3"?: string | null
+          "Lifestyle Amenities (comma-separated)"?: string | null
+          Phone?: string | null
+          State?: string | null
+          "Street Address"?: string | null
+          Website?: string | null
+          "ZIP Code"?: number | null
+        }
+        Relationships: []
+      }
+      intake_forms: {
+        Row: {
+          allergies: string | null
+          allow_covid_vaccine: boolean | null
+          allow_flu_vaccine: boolean | null
+          allow_tuberculin_test: boolean | null
+          can_be_met_by_facility: boolean | null
+          client_id: string | null
+          code_status: string | null
+          cognitive_status: Json | null
+          created_at: string | null
+          created_by_user_id: string | null
+          dietary_restrictions: string | null
+          dnr_directive_active: boolean | null
+          facility_name: string | null
+          functional_ability: Json | null
+          id: string
+          level_of_care: string | null
+          medication_assistance_level: string | null
+          medications: Json | null
+          patient_name: string | null
+          patient_signature_date: string | null
+          patient_signature_url: string | null
+          physician_signature_date: string | null
+          physician_signature_url: string | null
+          primary_diagnosis: string | null
+          reason_for_visit: string | null
+          secondary_diagnosis: string | null
+          status: string | null
+          updated_at: string | null
+          vitals: Json | null
+        }
+        Insert: {
+          allergies?: string | null
+          allow_covid_vaccine?: boolean | null
+          allow_flu_vaccine?: boolean | null
+          allow_tuberculin_test?: boolean | null
+          can_be_met_by_facility?: boolean | null
+          client_id?: string | null
+          code_status?: string | null
+          cognitive_status?: Json | null
+          created_at?: string | null
+          created_by_user_id?: string | null
+          dietary_restrictions?: string | null
+          dnr_directive_active?: boolean | null
+          facility_name?: string | null
+          functional_ability?: Json | null
+          id?: string
+          level_of_care?: string | null
+          medication_assistance_level?: string | null
+          medications?: Json | null
+          patient_name?: string | null
+          patient_signature_date?: string | null
+          patient_signature_url?: string | null
+          physician_signature_date?: string | null
+          physician_signature_url?: string | null
+          primary_diagnosis?: string | null
+          reason_for_visit?: string | null
+          secondary_diagnosis?: string | null
+          status?: string | null
+          updated_at?: string | null
+          vitals?: Json | null
+        }
+        Update: {
+          allergies?: string | null
+          allow_covid_vaccine?: boolean | null
+          allow_flu_vaccine?: boolean | null
+          allow_tuberculin_test?: boolean | null
+          can_be_met_by_facility?: boolean | null
+          client_id?: string | null
+          code_status?: string | null
+          cognitive_status?: Json | null
+          created_at?: string | null
+          created_by_user_id?: string | null
+          dietary_restrictions?: string | null
+          dnr_directive_active?: boolean | null
+          facility_name?: string | null
+          functional_ability?: Json | null
+          id?: string
+          level_of_care?: string | null
+          medication_assistance_level?: string | null
+          medications?: Json | null
+          patient_name?: string | null
+          patient_signature_date?: string | null
+          patient_signature_url?: string | null
+          physician_signature_date?: string | null
+          physician_signature_url?: string | null
+          primary_diagnosis?: string | null
+          reason_for_visit?: string | null
+          secondary_diagnosis?: string | null
+          status?: string | null
+          updated_at?: string | null
+          vitals?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intake_forms_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      interactions: {
+        Row: {
+          contact_id: string | null
+          content: string | null
+          created_at: string
+          facility_id: string | null
+          follow_up_date: string | null
+          id: string
+          interaction_date: string | null
+          status: string | null
+          subject: string | null
+          type: string
+          user_id: string | null
+        }
+        Insert: {
+          contact_id?: string | null
+          content?: string | null
+          created_at?: string
+          facility_id?: string | null
+          follow_up_date?: string | null
+          id?: string
+          interaction_date?: string | null
+          status?: string | null
+          subject?: string | null
+          type: string
+          user_id?: string | null
+        }
+        Update: {
+          contact_id?: string | null
+          content?: string | null
+          created_at?: string
+          facility_id?: string | null
+          follow_up_date?: string | null
+          id?: string
+          interaction_date?: string | null
+          status?: string | null
+          subject?: string | null
+          type?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "interactions_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "interactions_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "facility"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       invoice_items: {
         Row: {
@@ -975,6 +1722,38 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "invoice_items_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      invoice_line_items: {
+        Row: {
+          description: string
+          id: string
+          invoice_id: string
+          quantity: number
+          unit_price: number
+        }
+        Insert: {
+          description: string
+          id?: string
+          invoice_id: string
+          quantity?: number
+          unit_price: number
+        }
+        Update: {
+          description?: string
+          id?: string
+          invoice_id?: string
+          quantity?: number
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoice_line_items_invoice_id_fkey"
             columns: ["invoice_id"]
             isOneToOne: false
             referencedRelation: "invoices"
@@ -1090,6 +1869,183 @@ export type Database = {
           },
         ]
       }
+      medical_supply_companies: {
+        Row: {
+          acceptsassignement: boolean | null
+          businessname: string | null
+          is_contracted_for_cba: boolean | null
+          latitude: number | null
+          longitude: number | null
+          practiceaddress1: string | null
+          practiceaddress2: string | null
+          practicecity: string | null
+          practicename: string | null
+          practicestate: string | null
+          practicezip9code: number | null
+          provider_id: number
+          providertypelist: string | null
+          specialitieslist: string | null
+          supplieslist: string | null
+          telephonenumber: number | null
+          uuid: string
+        }
+        Insert: {
+          acceptsassignement?: boolean | null
+          businessname?: string | null
+          is_contracted_for_cba?: boolean | null
+          latitude?: number | null
+          longitude?: number | null
+          practiceaddress1?: string | null
+          practiceaddress2?: string | null
+          practicecity?: string | null
+          practicename?: string | null
+          practicestate?: string | null
+          practicezip9code?: number | null
+          provider_id: number
+          providertypelist?: string | null
+          specialitieslist?: string | null
+          supplieslist?: string | null
+          telephonenumber?: number | null
+          uuid?: string
+        }
+        Update: {
+          acceptsassignement?: boolean | null
+          businessname?: string | null
+          is_contracted_for_cba?: boolean | null
+          latitude?: number | null
+          longitude?: number | null
+          practiceaddress1?: string | null
+          practiceaddress2?: string | null
+          practicecity?: string | null
+          practicename?: string | null
+          practicestate?: string | null
+          practicezip9code?: number | null
+          provider_id?: number
+          providertypelist?: string | null
+          specialitieslist?: string | null
+          supplieslist?: string | null
+          telephonenumber?: number | null
+          uuid?: string
+        }
+        Relationships: []
+      }
+      merged_facilities: {
+        Row: {
+          accepts_medicaid: boolean | null
+          accepts_medicare: boolean | null
+          accepts_va_benefits: boolean | null
+          address_line1: string | null
+          address_line2: string | null
+          amenities: Json | null
+          business_hours: Json | null
+          capacity: number | null
+          city: string | null
+          created_at: string | null
+          current_availability: number | null
+          data_source: string | null
+          description: string | null
+          email: string | null
+          facility_type: string | null
+          id: string
+          image_urls: Json | null
+          is_active: boolean | null
+          is_verified: boolean | null
+          latitude: number | null
+          license_number: string | null
+          license_type: string | null
+          longitude: number | null
+          name: string
+          original_id: string | null
+          phone: string | null
+          price_range_max: number | null
+          price_range_min: number | null
+          rating: number | null
+          reviews_count: number | null
+          services: Json | null
+          state: string | null
+          updated_at: string | null
+          virtual_tour_url: string | null
+          website: string | null
+          zip_code: string | null
+        }
+        Insert: {
+          accepts_medicaid?: boolean | null
+          accepts_medicare?: boolean | null
+          accepts_va_benefits?: boolean | null
+          address_line1?: string | null
+          address_line2?: string | null
+          amenities?: Json | null
+          business_hours?: Json | null
+          capacity?: number | null
+          city?: string | null
+          created_at?: string | null
+          current_availability?: number | null
+          data_source?: string | null
+          description?: string | null
+          email?: string | null
+          facility_type?: string | null
+          id?: string
+          image_urls?: Json | null
+          is_active?: boolean | null
+          is_verified?: boolean | null
+          latitude?: number | null
+          license_number?: string | null
+          license_type?: string | null
+          longitude?: number | null
+          name: string
+          original_id?: string | null
+          phone?: string | null
+          price_range_max?: number | null
+          price_range_min?: number | null
+          rating?: number | null
+          reviews_count?: number | null
+          services?: Json | null
+          state?: string | null
+          updated_at?: string | null
+          virtual_tour_url?: string | null
+          website?: string | null
+          zip_code?: string | null
+        }
+        Update: {
+          accepts_medicaid?: boolean | null
+          accepts_medicare?: boolean | null
+          accepts_va_benefits?: boolean | null
+          address_line1?: string | null
+          address_line2?: string | null
+          amenities?: Json | null
+          business_hours?: Json | null
+          capacity?: number | null
+          city?: string | null
+          created_at?: string | null
+          current_availability?: number | null
+          data_source?: string | null
+          description?: string | null
+          email?: string | null
+          facility_type?: string | null
+          id?: string
+          image_urls?: Json | null
+          is_active?: boolean | null
+          is_verified?: boolean | null
+          latitude?: number | null
+          license_number?: string | null
+          license_type?: string | null
+          longitude?: number | null
+          name?: string
+          original_id?: string | null
+          phone?: string | null
+          price_range_max?: number | null
+          price_range_min?: number | null
+          rating?: number | null
+          reviews_count?: number | null
+          services?: Json | null
+          state?: string | null
+          updated_at?: string | null
+          virtual_tour_url?: string | null
+          website?: string | null
+          zip_code?: string | null
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           body: string | null
@@ -1128,6 +2084,129 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      nationwide_facilities: {
+        Row: {
+          "Abuse Icon": string | null
+          "Affiliated Entity ID": string | null
+          "Affiliated Entity Name": string | null
+          "Average Number of Residents per Day": number | null
+          "City/Town": string | null
+          "CMS Certification Number (CCN)": string | null
+          "Continuing Care Retirement Community": string | null
+          "County/Parish": string | null
+          "Date First Approved to Provide Medicare and Medicaid Services":
+            | string
+            | null
+          "Health Inspection Rating": string | null
+          Latitude: number | null
+          "Legal Business Name": string | null
+          Location: string | null
+          Longitude: number | null
+          "Number of Certified Beds": string | null
+          "Number of Citations from Infection Control Inspections":
+            | string
+            | null
+          "Number of Facility Reported Incidents": string | null
+          "Number of Fines": string | null
+          "Number of Substantiated Complaints": string | null
+          "Overall Rating": string | null
+          "Provider Address": string | null
+          "Provider Name": string | null
+          "Provider SSA County Code": string | null
+          "Provider Type": string | null
+          "QM Rating": string | null
+          "QM Rating Footnote": string | null
+          "Special Focus Status": string | null
+          "Staffing Rating": number | null
+          State: string | null
+          "Telephone Number": number | null
+          "Total Amount of Fines in Dollars": string | null
+          "Total Number of Penalties": string | null
+          UUID: string
+          "ZIP Code": number | null
+        }
+        Insert: {
+          "Abuse Icon"?: string | null
+          "Affiliated Entity ID"?: string | null
+          "Affiliated Entity Name"?: string | null
+          "Average Number of Residents per Day"?: number | null
+          "City/Town"?: string | null
+          "CMS Certification Number (CCN)"?: string | null
+          "Continuing Care Retirement Community"?: string | null
+          "County/Parish"?: string | null
+          "Date First Approved to Provide Medicare and Medicaid Services"?:
+            | string
+            | null
+          "Health Inspection Rating"?: string | null
+          Latitude?: number | null
+          "Legal Business Name"?: string | null
+          Location?: string | null
+          Longitude?: number | null
+          "Number of Certified Beds"?: string | null
+          "Number of Citations from Infection Control Inspections"?:
+            | string
+            | null
+          "Number of Facility Reported Incidents"?: string | null
+          "Number of Fines"?: string | null
+          "Number of Substantiated Complaints"?: string | null
+          "Overall Rating"?: string | null
+          "Provider Address"?: string | null
+          "Provider Name"?: string | null
+          "Provider SSA County Code"?: string | null
+          "Provider Type"?: string | null
+          "QM Rating"?: string | null
+          "QM Rating Footnote"?: string | null
+          "Special Focus Status"?: string | null
+          "Staffing Rating"?: number | null
+          State?: string | null
+          "Telephone Number"?: number | null
+          "Total Amount of Fines in Dollars"?: string | null
+          "Total Number of Penalties"?: string | null
+          UUID?: string
+          "ZIP Code"?: number | null
+        }
+        Update: {
+          "Abuse Icon"?: string | null
+          "Affiliated Entity ID"?: string | null
+          "Affiliated Entity Name"?: string | null
+          "Average Number of Residents per Day"?: number | null
+          "City/Town"?: string | null
+          "CMS Certification Number (CCN)"?: string | null
+          "Continuing Care Retirement Community"?: string | null
+          "County/Parish"?: string | null
+          "Date First Approved to Provide Medicare and Medicaid Services"?:
+            | string
+            | null
+          "Health Inspection Rating"?: string | null
+          Latitude?: number | null
+          "Legal Business Name"?: string | null
+          Location?: string | null
+          Longitude?: number | null
+          "Number of Certified Beds"?: string | null
+          "Number of Citations from Infection Control Inspections"?:
+            | string
+            | null
+          "Number of Facility Reported Incidents"?: string | null
+          "Number of Fines"?: string | null
+          "Number of Substantiated Complaints"?: string | null
+          "Overall Rating"?: string | null
+          "Provider Address"?: string | null
+          "Provider Name"?: string | null
+          "Provider SSA County Code"?: string | null
+          "Provider Type"?: string | null
+          "QM Rating"?: string | null
+          "QM Rating Footnote"?: string | null
+          "Special Focus Status"?: string | null
+          "Staffing Rating"?: number | null
+          State?: string | null
+          "Telephone Number"?: number | null
+          "Total Amount of Fines in Dollars"?: string | null
+          "Total Number of Penalties"?: string | null
+          UUID?: string
+          "ZIP Code"?: number | null
+        }
+        Relationships: []
       }
       payments: {
         Row: {
@@ -1264,6 +2343,7 @@ export type Database = {
           id: string
           intake_form_url: string | null
           received_at: string | null
+          referred_by_user_id: string | null
           status: string
           submitted_by: string | null
         }
@@ -1272,6 +2352,7 @@ export type Database = {
           id?: string
           intake_form_url?: string | null
           received_at?: string | null
+          referred_by_user_id?: string | null
           status: string
           submitted_by?: string | null
         }
@@ -1280,6 +2361,7 @@ export type Database = {
           id?: string
           intake_form_url?: string | null
           received_at?: string | null
+          referred_by_user_id?: string | null
           status?: string
           submitted_by?: string | null
         }
@@ -1330,25 +2412,31 @@ export type Database = {
           "City/Town": string | null
           Latitude: number | null
           Longitude: number | null
+          Medicare: boolean
           "Provider Address": string | null
           "Provider Name": string | null
           "Telephone Number": number | null
+          UUID: string
         }
         Insert: {
           "City/Town"?: string | null
           Latitude?: number | null
           Longitude?: number | null
+          Medicare?: boolean
           "Provider Address"?: string | null
           "Provider Name"?: string | null
           "Telephone Number"?: number | null
+          UUID?: string
         }
         Update: {
           "City/Town"?: string | null
           Latitude?: number | null
           Longitude?: number | null
+          Medicare?: boolean
           "Provider Address"?: string | null
           "Provider Name"?: string | null
           "Telephone Number"?: number | null
+          UUID?: string
         }
         Relationships: []
       }
@@ -1400,7 +2488,7 @@ export type Database = {
         }
         Relationships: []
       }
-      serpapi_raw_results: {
+      serperapi_raw_results: {
         Row: {
           created_at: string | null
           error_message: string | null
@@ -1467,131 +2555,92 @@ export type Database = {
           },
         ]
       }
+      squarespace_commerce: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          id: number
+          inventory_count: number
+          price: number
+          product_description: string | null
+          product_name: string
+          sku: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          id?: never
+          inventory_count: number
+          price: number
+          product_description?: string | null
+          product_name: string
+          sku?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          id?: never
+          inventory_count?: number
+          price?: number
+          product_description?: string | null
+          product_name?: string
+          sku?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       Storepoint: {
         Row: {
           address: string | null
-          altcs: string | null
-          azdhs: string | null
           capacity: string | null
           city: string | null
-          contact_us: string | null
           email: string | null
-          extra: string | null
-          extra2: string | null
-          extra3: string | null
-          facebook: string | null
-          features: string | null
-          features2: string | null
-          friday: string | null
           image_url: string | null
-          instagram: string | null
           lat: string | null
-          license: string | null
           lng: string | null
-          monday: string | null
           name: string | null
           phone: string | null
           reviews: string | null
-          saturday: string | null
-          schedule_tour: string | null
-          specials: string | null
           state: string | null
           street: string | null
-          sunday: string | null
-          thursday: string | null
-          tiktok: string | null
-          tuesday: string | null
-          twitter: string | null
           type: string | null
-          virtual_tour: string | null
-          visit_website: string | null
           website: string | null
-          wednesday: string | null
-          youtube: string | null
           zip: number | null
         }
         Insert: {
           address?: string | null
-          altcs?: string | null
-          azdhs?: string | null
           capacity?: string | null
           city?: string | null
-          contact_us?: string | null
           email?: string | null
-          extra?: string | null
-          extra2?: string | null
-          extra3?: string | null
-          facebook?: string | null
-          features?: string | null
-          features2?: string | null
-          friday?: string | null
           image_url?: string | null
-          instagram?: string | null
           lat?: string | null
-          license?: string | null
           lng?: string | null
-          monday?: string | null
           name?: string | null
           phone?: string | null
           reviews?: string | null
-          saturday?: string | null
-          schedule_tour?: string | null
-          specials?: string | null
           state?: string | null
           street?: string | null
-          sunday?: string | null
-          thursday?: string | null
-          tiktok?: string | null
-          tuesday?: string | null
-          twitter?: string | null
           type?: string | null
-          virtual_tour?: string | null
-          visit_website?: string | null
           website?: string | null
-          wednesday?: string | null
-          youtube?: string | null
           zip?: number | null
         }
         Update: {
           address?: string | null
-          altcs?: string | null
-          azdhs?: string | null
           capacity?: string | null
           city?: string | null
-          contact_us?: string | null
           email?: string | null
-          extra?: string | null
-          extra2?: string | null
-          extra3?: string | null
-          facebook?: string | null
-          features?: string | null
-          features2?: string | null
-          friday?: string | null
           image_url?: string | null
-          instagram?: string | null
           lat?: string | null
-          license?: string | null
           lng?: string | null
-          monday?: string | null
           name?: string | null
           phone?: string | null
           reviews?: string | null
-          saturday?: string | null
-          schedule_tour?: string | null
-          specials?: string | null
           state?: string | null
           street?: string | null
-          sunday?: string | null
-          thursday?: string | null
-          tiktok?: string | null
-          tuesday?: string | null
-          twitter?: string | null
           type?: string | null
-          virtual_tour?: string | null
-          visit_website?: string | null
           website?: string | null
-          wednesday?: string | null
-          youtube?: string | null
           zip?: number | null
         }
         Relationships: []
@@ -1669,6 +2718,78 @@ export type Database = {
           },
         ]
       }
+      subscribed: {
+        Row: {
+          "Call to Action Text": string | null
+          City: string | null
+          "Core Services (comma-separated)": string | null
+          "CTA Button 1 Link": string | null
+          "CTA Button 1 Text": string | null
+          "CTA Button 2 Link": string | null
+          "CTA Button 2 Text": string | null
+          Description: string | null
+          Email: string | null
+          "Facility Name": string | null
+          "Image URL 1": string | null
+          "Image URL 2": string | null
+          "Image URL 3": string | null
+          "Lifestyle Amenities (comma-separated)": string | null
+          Map: string | null
+          Phone: string | null
+          State: string | null
+          "Street Address": string | null
+          uuid: string
+          Website: string | null
+          "ZIP Code": number | null
+        }
+        Insert: {
+          "Call to Action Text"?: string | null
+          City?: string | null
+          "Core Services (comma-separated)"?: string | null
+          "CTA Button 1 Link"?: string | null
+          "CTA Button 1 Text"?: string | null
+          "CTA Button 2 Link"?: string | null
+          "CTA Button 2 Text"?: string | null
+          Description?: string | null
+          Email?: string | null
+          "Facility Name"?: string | null
+          "Image URL 1"?: string | null
+          "Image URL 2"?: string | null
+          "Image URL 3"?: string | null
+          "Lifestyle Amenities (comma-separated)"?: string | null
+          Map?: string | null
+          Phone?: string | null
+          State?: string | null
+          "Street Address"?: string | null
+          uuid?: string
+          Website?: string | null
+          "ZIP Code"?: number | null
+        }
+        Update: {
+          "Call to Action Text"?: string | null
+          City?: string | null
+          "Core Services (comma-separated)"?: string | null
+          "CTA Button 1 Link"?: string | null
+          "CTA Button 1 Text"?: string | null
+          "CTA Button 2 Link"?: string | null
+          "CTA Button 2 Text"?: string | null
+          Description?: string | null
+          Email?: string | null
+          "Facility Name"?: string | null
+          "Image URL 1"?: string | null
+          "Image URL 2"?: string | null
+          "Image URL 3"?: string | null
+          "Lifestyle Amenities (comma-separated)"?: string | null
+          Map?: string | null
+          Phone?: string | null
+          State?: string | null
+          "Street Address"?: string | null
+          uuid?: string
+          Website?: string | null
+          "ZIP Code"?: number | null
+        }
+        Relationships: []
+      }
       subscription_features: {
         Row: {
           created_at: string | null
@@ -1737,6 +2858,63 @@ export type Database = {
         }
         Relationships: []
       }
+      tasks: {
+        Row: {
+          contact_id: string | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          facility_id: string | null
+          id: string
+          priority: string | null
+          status: string | null
+          title: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          contact_id?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          facility_id?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          contact_id?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          facility_id?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "facility"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tours: {
         Row: {
           created_at: string
@@ -1791,6 +2969,156 @@ export type Database = {
           },
         ]
       }
+      unified_facilities: {
+        Row: {
+          accepts_medicaid: boolean | null
+          accepts_medicare: boolean | null
+          accepts_va_benefits: boolean | null
+          address_line1: string | null
+          address_line2: string | null
+          amenities: Json | null
+          business_hours: Json | null
+          capacity: number | null
+          city: string | null
+          created_at: string | null
+          current_availability: number | null
+          data_source: string | null
+          description: string | null
+          email: string | null
+          facility_type: string | null
+          id: string
+          image_urls: Json | null
+          is_active: boolean | null
+          is_verified: boolean | null
+          latitude: number | null
+          license_number: string | null
+          license_type: string | null
+          longitude: number | null
+          name: string
+          original_id: string | null
+          phone: string | null
+          price_range_max: number | null
+          price_range_min: number | null
+          rating: number | null
+          reviews_count: number | null
+          services: Json | null
+          state: string | null
+          updated_at: string | null
+          virtual_tour_url: string | null
+          website: string | null
+          zip_code: string | null
+        }
+        Insert: {
+          accepts_medicaid?: boolean | null
+          accepts_medicare?: boolean | null
+          accepts_va_benefits?: boolean | null
+          address_line1?: string | null
+          address_line2?: string | null
+          amenities?: Json | null
+          business_hours?: Json | null
+          capacity?: number | null
+          city?: string | null
+          created_at?: string | null
+          current_availability?: number | null
+          data_source?: string | null
+          description?: string | null
+          email?: string | null
+          facility_type?: string | null
+          id?: string
+          image_urls?: Json | null
+          is_active?: boolean | null
+          is_verified?: boolean | null
+          latitude?: number | null
+          license_number?: string | null
+          license_type?: string | null
+          longitude?: number | null
+          name: string
+          original_id?: string | null
+          phone?: string | null
+          price_range_max?: number | null
+          price_range_min?: number | null
+          rating?: number | null
+          reviews_count?: number | null
+          services?: Json | null
+          state?: string | null
+          updated_at?: string | null
+          virtual_tour_url?: string | null
+          website?: string | null
+          zip_code?: string | null
+        }
+        Update: {
+          accepts_medicaid?: boolean | null
+          accepts_medicare?: boolean | null
+          accepts_va_benefits?: boolean | null
+          address_line1?: string | null
+          address_line2?: string | null
+          amenities?: Json | null
+          business_hours?: Json | null
+          capacity?: number | null
+          city?: string | null
+          created_at?: string | null
+          current_availability?: number | null
+          data_source?: string | null
+          description?: string | null
+          email?: string | null
+          facility_type?: string | null
+          id?: string
+          image_urls?: Json | null
+          is_active?: boolean | null
+          is_verified?: boolean | null
+          latitude?: number | null
+          license_number?: string | null
+          license_type?: string | null
+          longitude?: number | null
+          name?: string
+          original_id?: string | null
+          phone?: string | null
+          price_range_max?: number | null
+          price_range_min?: number | null
+          rating?: number | null
+          reviews_count?: number | null
+          services?: Json | null
+          state?: string | null
+          updated_at?: string | null
+          virtual_tour_url?: string | null
+          website?: string | null
+          zip_code?: string | null
+        }
+        Relationships: []
+      }
+      "updated providers may 2025": {
+        Row: {
+          Address: string | null
+          City: string | null
+          "Facility Name": string | null
+          "Internal ID": string
+          "License ID": string | null
+          Source: string | null
+          State: string | null
+          Zip: number | null
+        }
+        Insert: {
+          Address?: string | null
+          City?: string | null
+          "Facility Name"?: string | null
+          "Internal ID": string
+          "License ID"?: string | null
+          Source?: string | null
+          State?: string | null
+          Zip?: number | null
+        }
+        Update: {
+          Address?: string | null
+          City?: string | null
+          "Facility Name"?: string | null
+          "Internal ID"?: string
+          "License ID"?: string | null
+          Source?: string | null
+          State?: string | null
+          Zip?: number | null
+        }
+        Relationships: []
+      }
       user_favorites: {
         Row: {
           created_at: string | null
@@ -1832,6 +3160,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_interactions: {
+        Row: {
+          created_at: string | null
+          generate_document_summary: Json | null
+          send_results_summary: Json | null
+          send_user_intent_summary: Json | null
+          uuid: string
+        }
+        Insert: {
+          created_at?: string | null
+          generate_document_summary?: Json | null
+          send_results_summary?: Json | null
+          send_user_intent_summary?: Json | null
+          uuid?: string
+        }
+        Update: {
+          created_at?: string | null
+          generate_document_summary?: Json | null
+          send_results_summary?: Json | null
+          send_user_intent_summary?: Json | null
+          uuid?: string
+        }
+        Relationships: []
       }
       user_profile_end_user: {
         Row: {
@@ -2004,6 +3356,24 @@ export type Database = {
           },
         ]
       }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_search_requests: {
         Row: {
           agent_id: string | null
@@ -2045,6 +3415,7 @@ export type Database = {
           last_login: string | null
           last_name: string | null
           mfa_enabled: boolean | null
+          organization: string | null
           password_hash: string | null
           phone: string | null
           profile_image_url: string | null
@@ -2063,6 +3434,7 @@ export type Database = {
           last_login?: string | null
           last_name?: string | null
           mfa_enabled?: boolean | null
+          organization?: string | null
           password_hash?: string | null
           phone?: string | null
           profile_image_url?: string | null
@@ -2081,6 +3453,7 @@ export type Database = {
           last_login?: string | null
           last_name?: string | null
           mfa_enabled?: boolean | null
+          organization?: string | null
           password_hash?: string | null
           phone?: string | null
           profile_image_url?: string | null
@@ -2144,9 +3517,74 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_user_profile: {
+        Args: {
+          user_id: string
+          date_of_birth: string
+          address_line_1: string
+          address_line_2: string
+          city: string
+          state: string
+          zip_code: string
+          care_recepient_relationship: Database["public"]["Enums"]["care_recepient_relationship"]
+          care_urgency: Database["public"]["Enums"]["care_urgency"]
+          budget_range: Database["public"]["Enums"]["budget_range"]
+          care_needs: Json
+          medical_conditions: Json
+          preferred_amenities: Json
+        }
+        Returns: undefined
+      }
+      has_agency_role: {
+        Args: {
+          _user_id: string
+          _agency_id: string
+          _role: Database["public"]["Enums"]["agency_role"]
+        }
+        Returns: boolean
+      }
+      has_app_role: {
+        Args: {
+          _user_id: string
+          _role: Database["public"]["Enums"]["app_role"]
+        }
+        Returns: boolean
+      }
+      insert_serperapi_raw_result: {
+        Args: {
+          user_search_request_id: string
+          raw_json_data: Json
+          parsing_status?: string
+          error_message?: string
+        }
+        Returns: string
+      }
+      insert_user_interaction: {
+        Args: {
+          user_intent_summary: Json
+          results_summary: Json
+          document_summary: Json
+        }
+        Returns: {
+          uuid: string
+          confirmation_message: string
+        }[]
+      }
+      parse_google_maps_results: {
+        Args: { raw_results: Json }
+        Returns: undefined
+      }
+      split_name: {
+        Args: { full_name: string }
+        Returns: {
+          first_name: string
+          last_name: string
+        }[]
+      }
     }
     Enums: {
+      agency_role: "owner" | "admin" | "agent" | "viewer"
+      app_role: "admin" | "moderator" | "user"
       appointment_type: "consultation" | "tour" | "follow_up"
       budget_range:
         | "$2,000 - $4,000"
@@ -2304,6 +3742,8 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      agency_role: ["owner", "admin", "agent", "viewer"],
+      app_role: ["admin", "moderator", "user"],
       appointment_type: ["consultation", "tour", "follow_up"],
       budget_range: [
         "$2,000 - $4,000",
