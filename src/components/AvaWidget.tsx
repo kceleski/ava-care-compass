@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -16,7 +15,7 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
   const [isListening, setIsListening] = useState(false);
   const [showFullScreen, setShowFullScreen] = useState(false);
   const [agentReply, setAgentReply] = useState('');
-  const [assistantName, setAssistantName] = useState<'greeter' | 'ava' | 'ranger'>('greeter');
+  const [assistantName, setAssistantName] = useState<'greeter' | 'ava' | 'ranger'>('ava');
   const [chatOpen, setChatOpen] = useState(false);
   const [messages, setMessages] = useState<Array<{ text: string; isUser: boolean }>>([]);
   const navigate = useNavigate();
@@ -89,7 +88,7 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
     switch (assistantName) {
       case 'ranger': return 'Ranger, Veteran Support Bot';
       case 'ava': return 'AVA Assistant';
-      default: return 'Welcome Assistant';
+      default: return 'AVA Assistant';
     }
   };
 
@@ -97,7 +96,7 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
     switch (assistantName) {
       case 'ranger': return '/images/ranger.png';
       case 'ava': return '/images/ava.png';
-      default: return '/images/greeter.png';
+      default: return '/images/ava.png';
     }
   };
 
