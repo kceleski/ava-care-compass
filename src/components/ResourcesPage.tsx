@@ -204,7 +204,7 @@ const ResourcesPage = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-primary-bright"
+                className="border-red-500 bg-red-500 text-white hover:bg-red-600 hover:border-red-600"
               >
                 <Phone className="mr-2 h-5 w-5" />
                 Speak with Expert
