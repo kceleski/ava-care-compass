@@ -1027,6 +1027,96 @@ export type Database = {
         }
         Relationships: []
       }
+      facilities: {
+        Row: {
+          accepts_medicaid: boolean | null
+          accepts_medicare: boolean | null
+          accepts_va_benefits: boolean | null
+          address_line1: string | null
+          address_line2: string | null
+          capacity: number | null
+          city: string | null
+          created_at: string
+          current_availability: number | null
+          description: string | null
+          email: string | null
+          facility_type: string | null
+          id: string
+          is_featured: boolean | null
+          is_verified: boolean | null
+          latitude: number | null
+          longitude: number | null
+          name: string
+          phone: string | null
+          price_range_max: number | null
+          price_range_min: number | null
+          rating: number | null
+          reviews_count: number | null
+          state: string | null
+          updated_at: string
+          website: string | null
+          zip_code: string | null
+        }
+        Insert: {
+          accepts_medicaid?: boolean | null
+          accepts_medicare?: boolean | null
+          accepts_va_benefits?: boolean | null
+          address_line1?: string | null
+          address_line2?: string | null
+          capacity?: number | null
+          city?: string | null
+          created_at?: string
+          current_availability?: number | null
+          description?: string | null
+          email?: string | null
+          facility_type?: string | null
+          id?: string
+          is_featured?: boolean | null
+          is_verified?: boolean | null
+          latitude?: number | null
+          longitude?: number | null
+          name: string
+          phone?: string | null
+          price_range_max?: number | null
+          price_range_min?: number | null
+          rating?: number | null
+          reviews_count?: number | null
+          state?: string | null
+          updated_at?: string
+          website?: string | null
+          zip_code?: string | null
+        }
+        Update: {
+          accepts_medicaid?: boolean | null
+          accepts_medicare?: boolean | null
+          accepts_va_benefits?: boolean | null
+          address_line1?: string | null
+          address_line2?: string | null
+          capacity?: number | null
+          city?: string | null
+          created_at?: string
+          current_availability?: number | null
+          description?: string | null
+          email?: string | null
+          facility_type?: string | null
+          id?: string
+          is_featured?: boolean | null
+          is_verified?: boolean | null
+          latitude?: number | null
+          longitude?: number | null
+          name?: string
+          phone?: string | null
+          price_range_max?: number | null
+          price_range_min?: number | null
+          rating?: number | null
+          reviews_count?: number | null
+          state?: string | null
+          updated_at?: string
+          website?: string | null
+          zip_code?: string | null
+        }
+        Relationships: []
+      }
       facility: {
         Row: {
           accepts_medicaid: boolean | null
