@@ -3053,6 +3053,41 @@ export type Database = {
           },
         ]
       }
+      search_conversation_summaries: {
+        Row: {
+          created_at: string
+          id: string
+          markup_content: string
+          search_result_id: string | null
+          summary_text: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          markup_content: string
+          search_result_id?: string | null
+          summary_text: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          markup_content?: string
+          search_result_id?: string | null
+          summary_text?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "search_conversation_summaries_search_result_id_fkey"
+            columns: ["search_result_id"]
+            isOneToOne: false
+            referencedRelation: "serperapi_search_results"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       search_results: {
         Row: {
           created_at: string
@@ -3166,6 +3201,83 @@ export type Database = {
         }
         Relationships: []
       }
+      serperapi_places: {
+        Row: {
+          address: string | null
+          cid: string | null
+          created_at: string
+          external_uuid: string | null
+          fid: string | null
+          id: string
+          latitude: number | null
+          longitude: number | null
+          opening_hours: Json | null
+          phone_number: string | null
+          place_id: string | null
+          place_type: string | null
+          place_types: Json | null
+          position: number | null
+          rating: number | null
+          rating_count: number | null
+          search_result_id: string | null
+          thumbnail_url: string | null
+          title: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          cid?: string | null
+          created_at?: string
+          external_uuid?: string | null
+          fid?: string | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          opening_hours?: Json | null
+          phone_number?: string | null
+          place_id?: string | null
+          place_type?: string | null
+          place_types?: Json | null
+          position?: number | null
+          rating?: number | null
+          rating_count?: number | null
+          search_result_id?: string | null
+          thumbnail_url?: string | null
+          title: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          cid?: string | null
+          created_at?: string
+          external_uuid?: string | null
+          fid?: string | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          opening_hours?: Json | null
+          phone_number?: string | null
+          place_id?: string | null
+          place_type?: string | null
+          place_types?: Json | null
+          position?: number | null
+          rating?: number | null
+          rating_count?: number | null
+          search_result_id?: string | null
+          thumbnail_url?: string | null
+          title?: string
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "serperapi_places_search_result_id_fkey"
+            columns: ["search_result_id"]
+            isOneToOne: false
+            referencedRelation: "serperapi_search_results"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       serperapi_raw_results: {
         Row: {
           created_at: string | null
@@ -3200,6 +3312,33 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      serperapi_search_results: {
+        Row: {
+          created_at: string
+          id: string
+          raw_response: Json
+          search_parameters: Json | null
+          search_query: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          raw_response: Json
+          search_parameters?: Json | null
+          search_query: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          raw_response?: Json
+          search_parameters?: Json | null
+          search_query?: string
+          user_id?: string | null
+        }
+        Relationships: []
       }
       specialist_notes: {
         Row: {

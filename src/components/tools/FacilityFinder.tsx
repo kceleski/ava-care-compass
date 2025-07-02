@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { MapPin, Phone, Star, Clock, ExternalLink, Navigation } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import SearchResultsSummary from '@/components/SearchResultsSummary';
 
 interface Facility {
   id: string;
@@ -33,6 +34,7 @@ interface Facility {
 
 const FacilityFinder = () => {
   const [facilities, setFacilities] = useState<Facility[]>([]);
+  const [searchResultId, setSearchResultId] = useState<string | null>(null);
   const [filters, setFilters] = useState({
     location: '',
     facility_type: '',
@@ -95,38 +97,68 @@ const FacilityFinder = () => {
     setLoading(true);
 
     try {
-      let query = supabase
-        .from('facilities')
-        .select('*')
-        .order('rating', { ascending: false });
-
-      if (filters.facility_type) {
-        query = query.eq('facility_type', filters.facility_type);
-      }
-
-      if (filters.accepts_medicare) {
-        query = query.eq('accepts_medicare', true);
-      }
-
-      if (filters.accepts_medicaid) {
-        query = query.eq('accepts_medicaid', true);
-      }
-
-      // Add location-based filtering here if needed
-      // For now, we'll show all facilities and let users filter by location visually
-
-      const { data, error } = await query.limit(20);
-
-      if (error) {
-        throw error;
-      }
-
-      setFacilities(data || []);
+      // Build search query for SerperAPI
+      let searchQuery = filters.facility_type || 'assisted living';
       
-      if (data?.length === 0) {
+      if (filters.accepts_medicare) {
+        searchQuery += ' medicare accepted';
+      }
+      if (filters.accepts_medicaid) {
+        searchQuery += ' medicaid accepted';
+      }
+
+      const searchPayload = {
+        query: searchQuery,
+        location: filters.location,
+        type: 'assisted living',
+        num: 20
+      };
+
+      // Call SerperAPI edge function
+      const { data: searchData, error: searchError } = await supabase.functions.invoke('serper-search', {
+        body: searchPayload
+      });
+
+      if (searchError) {
+        throw searchError;
+      }
+
+      // Transform SerperAPI results to match our Facility interface
+      const transformedFacilities = searchData.places?.map((place: any) => ({
+        id: place.placeId || place.cid || Math.random().toString(),
+        name: place.title,
+        facility_type: filters.facility_type || 'Assisted Living',
+        address_line1: place.address?.split(',')[0] || place.address || '',
+        city: place.address?.split(',')[1]?.trim() || '',
+        state: place.address?.split(',')[2]?.trim() || '',
+        zip_code: place.address?.split(',')[3]?.trim() || '',
+        phone: place.phoneNumber || '',
+        website: place.website || '',
+        description: `${place.title} - ${place.type || 'Senior Care Facility'}`,
+        rating: place.rating || 0,
+        reviews_count: place.ratingCount || 0,
+        price_range_min: 3000, // Default values since SerperAPI doesn't provide pricing
+        price_range_max: 8000,
+        current_availability: Math.floor(Math.random() * 10) + 1, // Mock availability
+        accepts_medicare: filters.accepts_medicare,
+        accepts_medicaid: filters.accepts_medicaid,
+        is_featured: false,
+        latitude: place.latitude || 0,
+        longitude: place.longitude || 0
+      })) || [];
+
+      setFacilities(transformedFacilities);
+      setSearchResultId(searchData.searchResultId);
+      
+      if (transformedFacilities.length === 0) {
         toast({
           title: "No Results",
           description: "No facilities found matching your criteria. Try adjusting your filters.",
+        });
+      } else {
+        toast({
+          title: "Search Complete",
+          description: `Found ${transformedFacilities.length} facilities using live search data.`,
         });
       }
     } catch (error) {
@@ -135,6 +167,7 @@ const FacilityFinder = () => {
         description: "Failed to search facilities. Please try again.",
         variant: "destructive",
       });
+      console.error('Search error:', error);
     } finally {
       setLoading(false);
     }
@@ -272,133 +305,14 @@ const FacilityFinder = () => {
         </CardContent>
       </Card>
 
-      {facilities.length > 0 && (
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-text-primary">
-              Found {facilities.length} facilities
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {facilities.map((facility) => (
-              <Card key={facility.id} className="glass-card hover:shadow-lg transition-all">
-                <CardContent className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-text-primary text-lg mb-1">
-                        {facility.name}
-                      </h4>
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Badge variant="secondary" className="text-xs">
-                          {facility.facility_type}
-                        </Badge>
-                        {facility.is_featured && (
-                          <Badge className="bg-warning text-warning-foreground text-xs">
-                            Featured
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                    {facility.rating && (
-                      <div className="flex items-center space-x-1">
-                        <Star className="h-4 w-4 fill-warning text-warning" />
-                        <span className="font-medium">{facility.rating}</span>
-                        <span className="text-sm text-text-secondary">
-                          ({facility.reviews_count})
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-start space-x-2">
-                      <MapPin className="h-4 w-4 text-text-secondary mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-text-secondary">
-                        {formatAddress(facility)}
-                      </span>
-                    </div>
-                    
-                    {facility.phone && (
-                      <div className="flex items-center space-x-2">
-                        <Phone className="h-4 w-4 text-text-secondary" />
-                        <span className="text-sm text-text-secondary">{facility.phone}</span>
-                      </div>
-                    )}
-
-                    {facility.current_availability !== null && (
-                      <div className="flex items-center space-x-2">
-                        <Clock className="h-4 w-4 text-text-secondary" />
-                        <span className="text-sm text-text-secondary">
-                          {facility.current_availability > 0 
-                            ? `${facility.current_availability} beds available`
-                            : 'No availability'
-                          }
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {facility.description && (
-                    <p className="text-sm text-text-secondary mb-4 line-clamp-2">
-                      {facility.description}
-                    </p>
-                  )}
-
-                  {(facility.price_range_min || facility.price_range_max) && (
-                    <div className="mb-4">
-                      <span className="text-sm font-medium text-text-primary">
-                        Price Range: ${facility.price_range_min?.toLocaleString()} - ${facility.price_range_max?.toLocaleString()}/month
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="flex items-center space-x-2 mb-4">
-                    {facility.accepts_medicare && (
-                      <Badge variant="outline" className="text-xs">Medicare</Badge>
-                    )}
-                    {facility.accepts_medicaid && (
-                      <Badge variant="outline" className="text-xs">Medicaid</Badge>
-                    )}
-                  </div>
-
-                  <div className="flex space-x-2">
-                    {facility.phone && (
-                      <Button
-                        size="sm"
-                        onClick={() => callFacility(facility.phone)}
-                        className="flex-1"
-                      >
-                        <Phone className="mr-1 h-4 w-4" />
-                        Call
-                      </Button>
-                    )}
-                    
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => getDirections(facility)}
-                      className="flex-1"
-                    >
-                      <MapPin className="mr-1 h-4 w-4" />
-                      Directions
-                    </Button>
-
-                    {facility.website && (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => visitWebsite(facility.website)}
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                      </Button>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+      {searchResultId && (
+        <SearchResultsSummary 
+          searchResultId={searchResultId} 
+          onOpenFacilityDetails={(facility) => {
+            // Handle facility detail opening
+            console.log('Opening facility details:', facility);
+          }}
+        />
       )}
     </div>
   );
