@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { MessageCircle, Mic, MicOff, Minimize2, Maximize2, X } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { MessageCircle, Mic, MicOff, Minimize2, Maximize2, X, Send } from 'lucide-react';
 
 interface AvaWidgetProps {
   isFullScreen?: boolean;
@@ -18,6 +19,7 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
   const [assistantName, setAssistantName] = useState<'greeter' | 'ava' | 'ranger'>('ava');
   const [chatOpen, setChatOpen] = useState(false);
   const [messages, setMessages] = useState<Array<{ text: string; isUser: boolean }>>([]);
+  const [textInput, setTextInput] = useState('');
   const navigate = useNavigate();
   const recognitionRef = useRef<SpeechRecognition | null>(null);
 
@@ -36,6 +38,33 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
 
   const handleStartAssessment = () => {
     navigate('/find-care');
+    setChatOpen(false);
+    setIsMinimized(true);
+  };
+
+  const handleSendMessage = () => {
+    if (textInput.trim()) {
+      setMessages(prev => [...prev, { text: textInput, isUser: true }]);
+      
+      // Simple mock response - in a real app, this would call an AI service
+      const response = `I received your message: "${textInput}". How can I help you with that?`;
+      setAgentReply(response);
+      setMessages(prev => [...prev, { text: response, isUser: false }]);
+      
+      if (textInput.toLowerCase().includes('veteran')) {
+        setAssistantName('ranger');
+      } else {
+        setAssistantName('ava');
+      }
+      
+      setTextInput('');
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
   };
 
   const startVoiceRecognition = () => {
@@ -139,22 +168,41 @@ const AvaWidget = ({ isFullScreen = false, onFullScreenToggle, context = "genera
             </div>
           ))}
         </div>
-        <div className="p-4 border-t flex space-x-2">
-          <Button 
-            size="sm" 
-            className="bg-sky-500 hover:bg-sky-600 text-white"
-            onClick={handleStartAssessment}
-          >
-            Start Assessment
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={isListening ? stopVoiceRecognition : startVoiceRecognition}
-            className={isListening ? "border-red-500" : ""}
-          >
-            {isListening ? <MicOff className="h-3 w-3" /> : <Mic className="h-3 w-3" />}
-          </Button>
+        <div className="p-4 border-t space-y-3">
+          <div className="flex space-x-2">
+            <Input
+              placeholder="Type your message..."
+              value={textInput}
+              onChange={(e) => setTextInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className="flex-1"
+            />
+            <Button
+              size="sm"
+              onClick={handleSendMessage}
+              disabled={!textInput.trim()}
+              className="bg-sky-500 hover:bg-sky-600 text-white"
+            >
+              <Send className="h-4 w-4" />
+            </Button>
+          </div>
+          <div className="flex space-x-2">
+            <Button 
+              size="sm" 
+              className="flex-1 bg-sky-500 hover:bg-sky-600 text-white"
+              onClick={handleStartAssessment}
+            >
+              Start Assessment
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={isListening ? stopVoiceRecognition : startVoiceRecognition}
+              className={isListening ? "border-red-500" : ""}
+            >
+              {isListening ? <MicOff className="h-3 w-3" /> : <Mic className="h-3 w-3" />}
+            </Button>
+          </div>
         </div>
       </Card>
     );
