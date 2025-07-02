@@ -39,7 +39,7 @@ const FeedbackSystem = () => {
     // Add hover effects for interactive elements
     const handleMouseEnter = (event: Event) => {
       const target = event.target as HTMLElement;
-      if (target.hasAttribute('data-interactive')) {
+      if (target && typeof target.hasAttribute === 'function' && target.hasAttribute('data-interactive')) {
         target.style.transform = 'scale(1.05)';
         target.style.transition = 'transform 0.2s ease';
       }
@@ -47,7 +47,7 @@ const FeedbackSystem = () => {
 
     const handleMouseLeave = (event: Event) => {
       const target = event.target as HTMLElement;
-      if (target.hasAttribute('data-interactive')) {
+      if (target && typeof target.hasAttribute === 'function' && target.hasAttribute('data-interactive')) {
         target.style.transform = 'scale(1)';
       }
     };
