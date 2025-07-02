@@ -1,0 +1,222 @@
+-- Seed data for ava-care-compass project
+
+-- Insert sample facilities
+INSERT INTO public.facilities (
+  name, facility_type, address_line1, city, state, zip_code, 
+  phone, email, website, description, latitude, longitude,
+  capacity, current_availability, price_range_min, price_range_max,
+  accepts_medicare, accepts_medicaid, accepts_va_benefits, rating, reviews_count,
+  is_verified, is_featured
+) VALUES 
+(
+  'Sunset Manor Assisted Living',
+  'Assisted Living',
+  '123 Oak Street',
+  'Los Angeles',
+  'CA',
+  '90210',
+  '(555) 123-4567',
+  'info@sunsetmanor.com',
+  'https://sunsetmanor.com',
+  'A warm and welcoming assisted living community with 24/7 care, memory care services, and beautiful gardens.',
+  34.0522,
+  -118.2437,
+  120,
+  15,
+  3500,
+  6500,
+  true,
+  true,
+  false,
+  4.5,
+  127,
+  true,
+  true
+),
+(
+  'Golden Years Memory Care',
+  'Memory Care',
+  '456 Maple Avenue',
+  'San Francisco',
+  'CA',
+  '94102',
+  '(555) 987-6543',
+  'contact@goldenyears.com',
+  'https://goldenyears.com',
+  'Specialized memory care facility with secure environment and expert staff trained in dementia care.',
+  37.7749,
+  -122.4194,
+  80,
+  8,
+  5000,
+  8500,
+  true,
+  true,
+  true,
+  4.7,
+  89,
+  true,
+  true
+),
+(
+  'Riverside Nursing Home',
+  'Nursing Home',
+  '789 River Road',
+  'Sacramento',
+  'CA',
+  '95814',
+  '(555) 456-7890',
+  'admin@riverside.com',
+  'https://riverside.com',
+  'Full-service nursing home providing comprehensive medical care and rehabilitation services.',
+  38.5816,
+  -121.4944,
+  200,
+  25,
+  4500,
+  7500,
+  true,
+  true,
+  true,
+  4.2,
+  203,
+  true,
+  false
+),
+(
+  'Peaceful Gardens Senior Living',
+  'Independent Living',
+  '321 Garden Street',
+  'San Diego',
+  'CA',
+  '92101',
+  '(555) 234-5678',
+  'hello@peacefulgardens.com',
+  'https://peacefulgardens.com',
+  'Independent living community with luxury amenities, fitness center, and social activities.',
+  32.7157,
+  -117.1611,
+  150,
+  20,
+  2500,
+  4500,
+  false,
+  false,
+  false,
+  4.3,
+  156,
+  true,
+  false
+),
+(
+  'Harmony Heights Care Center',
+  'Assisted Living',
+  '654 Hill Drive',
+  'Fresno',
+  'CA',
+  '93721',
+  '(555) 345-6789',
+  'info@harmonyheights.com',
+  'https://harmonyheights.com',
+  'Family-owned assisted living facility with personalized care plans and home-like atmosphere.',
+  36.7378,
+  -119.7871,
+  90,
+  12,
+  3200,
+  5800,
+  true,
+  true,
+  false,
+  4.4,
+  92,
+  true,
+  false
+),
+(
+  'Oceanview Senior Community',
+  'Continuing Care',
+  '987 Coastal Highway',
+  'Monterey',
+  'CA',
+  '93940',
+  '(555) 567-8901',
+  'contact@oceanview.com',
+  'https://oceanview.com',
+  'Luxury continuing care retirement community with ocean views and resort-style amenities.',
+  36.6002,
+  -121.8947,
+  250,
+  18,
+  6000,
+  12000,
+  true,
+  false,
+  true,
+  4.8,
+  341,
+  true,
+  true
+);
+
+-- Insert sample seniors
+INSERT INTO public.seniors (
+  name, age, contact_name, contact_email, contact_phone,
+  preferred_location, budget_min, budget_max, medical_needs, additional_preferences
+) VALUES 
+(
+  'Margaret Thompson',
+  82,
+  'Sarah Thompson',
+  'sarah.thompson@email.com',
+  '(555) 111-2222',
+  'Los Angeles, CA',
+  3000,
+  5000,
+  ARRAY['Diabetes Management', 'Mobility Assistance', 'Medication Management'],
+  '{"pet_friendly": true, "garden_access": true, "family_visits": "frequent"}'::jsonb
+),
+(
+  'Robert Johnson',
+  78,
+  'Michael Johnson',
+  'mike.johnson@email.com',
+  '(555) 333-4444',
+  'San Francisco, CA',
+  4000,
+  7000,
+  ARRAY['Heart Condition', 'Physical Therapy'],
+  '{"social_activities": true, "transportation": true, "wifi": true}'::jsonb
+),
+(
+  'Eleanor Davis',
+  85,
+  'Patricia Davis',
+  'patricia.davis@email.com',
+  '(555) 555-6666',
+  'San Diego, CA',
+  2500,
+  4000,
+  ARRAY['Alzheimer Disease', 'Memory Care'],
+  '{"secure_environment": true, "specialized_care": true, "visiting_hours": "flexible"}'::jsonb
+);
+
+-- Insert sample analytics events
+INSERT INTO public.analytics (
+  user_id, event_type, metadata
+) VALUES 
+(
+  null,
+  'facility_search',
+  '{"location": "Los Angeles", "facility_type": "Assisted Living", "results_count": 3}'::jsonb
+),
+(
+  null,
+  'facility_view',
+  '{"facility_id": "sunset-manor", "facility_name": "Sunset Manor Assisted Living"}'::jsonb
+),
+(
+  null,
+  'search_filter_applied',
+  '{"filter_type": "price_range", "min_price": 3000, "max_price": 6000}'::jsonb
+);
