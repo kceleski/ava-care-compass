@@ -315,6 +315,394 @@ export type Database = {
           },
         ]
       }
+      agentmobile_admins: {
+        Row: {
+          created_at: string | null
+          id: string
+          permissions: Json | null
+          role: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          permissions?: Json | null
+          role?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          permissions?: Json | null
+          role?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agentmobile_admins_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "agentmobile_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agentmobile_conversations: {
+        Row: {
+          conversation_data: Json | null
+          conversation_id: string | null
+          ended_at: string | null
+          id: string
+          started_at: string | null
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          conversation_data?: Json | null
+          conversation_id?: string | null
+          ended_at?: string | null
+          id?: string
+          started_at?: string | null
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          conversation_data?: Json | null
+          conversation_id?: string | null
+          ended_at?: string | null
+          id?: string
+          started_at?: string | null
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agentmobile_conversations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "agentmobile_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agentmobile_email_preferences: {
+        Row: {
+          created_at: string | null
+          facility_updates: boolean | null
+          id: string
+          marketing: boolean | null
+          newsletter: boolean | null
+          search_alerts: boolean | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          facility_updates?: boolean | null
+          id?: string
+          marketing?: boolean | null
+          newsletter?: boolean | null
+          search_alerts?: boolean | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          facility_updates?: boolean | null
+          id?: string
+          marketing?: boolean | null
+          newsletter?: boolean | null
+          search_alerts?: boolean | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agentmobile_email_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "agentmobile_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agentmobile_facilities: {
+        Row: {
+          accepted_payers: Json | null
+          address: string | null
+          amenities: Json | null
+          availability: number | null
+          capacity: number | null
+          care_services: Json | null
+          city: string | null
+          created_at: string | null
+          description: string | null
+          email: string | null
+          id: string
+          image_urls: Json | null
+          is_active: boolean | null
+          latitude: number | null
+          license_number: string | null
+          longitude: number | null
+          name: string
+          phone: string | null
+          price_max: number | null
+          price_min: number | null
+          rating: number | null
+          state: string | null
+          type: string | null
+          updated_at: string | null
+          website: string | null
+          zip_code: string | null
+        }
+        Insert: {
+          accepted_payers?: Json | null
+          address?: string | null
+          amenities?: Json | null
+          availability?: number | null
+          capacity?: number | null
+          care_services?: Json | null
+          city?: string | null
+          created_at?: string | null
+          description?: string | null
+          email?: string | null
+          id?: string
+          image_urls?: Json | null
+          is_active?: boolean | null
+          latitude?: number | null
+          license_number?: string | null
+          longitude?: number | null
+          name: string
+          phone?: string | null
+          price_max?: number | null
+          price_min?: number | null
+          rating?: number | null
+          state?: string | null
+          type?: string | null
+          updated_at?: string | null
+          website?: string | null
+          zip_code?: string | null
+        }
+        Update: {
+          accepted_payers?: Json | null
+          address?: string | null
+          amenities?: Json | null
+          availability?: number | null
+          capacity?: number | null
+          care_services?: Json | null
+          city?: string | null
+          created_at?: string | null
+          description?: string | null
+          email?: string | null
+          id?: string
+          image_urls?: Json | null
+          is_active?: boolean | null
+          latitude?: number | null
+          license_number?: string | null
+          longitude?: number | null
+          name?: string
+          phone?: string | null
+          price_max?: number | null
+          price_min?: number | null
+          rating?: number | null
+          state?: string | null
+          type?: string | null
+          updated_at?: string | null
+          website?: string | null
+          zip_code?: string | null
+        }
+        Relationships: []
+      }
+      agentmobile_favorites: {
+        Row: {
+          created_at: string | null
+          facility_id: string
+          id: string
+          notes: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          facility_id: string
+          id?: string
+          notes?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          facility_id?: string
+          id?: string
+          notes?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agentmobile_favorites_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "agentmobile_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agentmobile_favorites_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "agentmobile_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agentmobile_interactions: {
+        Row: {
+          created_at: string | null
+          facility_id: string | null
+          id: string
+          interaction_data: Json | null
+          interaction_type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          facility_id?: string | null
+          id?: string
+          interaction_data?: Json | null
+          interaction_type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          facility_id?: string | null
+          id?: string
+          interaction_data?: Json | null
+          interaction_type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agentmobile_interactions_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "agentmobile_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agentmobile_interactions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "agentmobile_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agentmobile_profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          id: string
+          location: string | null
+          preferences: Json | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          id?: string
+          location?: string | null
+          preferences?: Json | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          id?: string
+          location?: string | null
+          preferences?: Json | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agentmobile_profiles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "agentmobile_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agentmobile_searches: {
+        Row: {
+          created_at: string | null
+          id: string
+          results_count: number | null
+          search_filters: Json | null
+          search_query: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          results_count?: number | null
+          search_filters?: Json | null
+          search_query: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          results_count?: number | null
+          search_filters?: Json | null
+          search_query?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agentmobile_searches_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "agentmobile_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agentmobile_users: {
+        Row: {
+          created_at: string | null
+          email: string
+          first_name: string | null
+          id: string
+          is_active: boolean | null
+          last_name: string | null
+          phone: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          first_name?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_name?: string | null
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          first_name?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_name?: string | null
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       amenities: {
         Row: {
           category: string | null
