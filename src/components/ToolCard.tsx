@@ -21,7 +21,7 @@ const ToolCard = ({ title, description, icon, action, onClick }: ToolCardProps) 
         <h3 className="font-semibold text-text-primary mb-2">{title}</h3>
         <p className="text-sm text-text-secondary mb-4">{description}</p>
         <Button 
-          className="w-full bg-sky-500 hover:bg-sky-600 text-white"
+          className="w-full bg-primary-bright hover:bg-primary-dark text-white"
           onClick={onClick}
         >
           {action}

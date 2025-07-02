@@ -920,6 +920,101 @@ export type Database = {
           },
         ]
       }
+      care_needs_assessments: {
+        Row: {
+          cognitive_status: string | null
+          created_at: string
+          current_mobility: string | null
+          id: string
+          medical_conditions: string | null
+          support_system: string | null
+          user_id: string
+        }
+        Insert: {
+          cognitive_status?: string | null
+          created_at?: string
+          current_mobility?: string | null
+          id?: string
+          medical_conditions?: string | null
+          support_system?: string | null
+          user_id: string
+        }
+        Update: {
+          cognitive_status?: string | null
+          created_at?: string
+          current_mobility?: string | null
+          id?: string
+          medical_conditions?: string | null
+          support_system?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      care_services: {
+        Row: {
+          additional_cost: number
+          care_type_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          additional_cost: number
+          care_type_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          additional_cost?: number
+          care_type_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "care_services_care_type_id_fkey"
+            columns: ["care_type_id"]
+            isOneToOne: false
+            referencedRelation: "care_type_definitions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      care_type_definitions: {
+        Row: {
+          base_hourly_rate: number
+          category: string | null
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          base_hourly_rate: number
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          base_hourly_rate?: number
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       care_types: {
         Row: {
           care_type_id: string | null
@@ -1412,6 +1507,39 @@ export type Database = {
           name?: string
           subject?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      emergency_contacts: {
+        Row: {
+          available_24_7: boolean | null
+          contact_type: string
+          created_at: string
+          description: string | null
+          id: string
+          location_specific: string | null
+          name: string
+          phone: string
+        }
+        Insert: {
+          available_24_7?: boolean | null
+          contact_type: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          location_specific?: string | null
+          name: string
+          phone: string
+        }
+        Update: {
+          available_24_7?: boolean | null
+          contact_type?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          location_specific?: string | null
+          name?: string
+          phone?: string
         }
         Relationships: []
       }
@@ -2347,6 +2475,30 @@ export type Database = {
           },
         ]
       }
+      location_multipliers: {
+        Row: {
+          city: string
+          cost_multiplier: number
+          created_at: string
+          id: string
+          state: string
+        }
+        Insert: {
+          city: string
+          cost_multiplier?: number
+          created_at?: string
+          id?: string
+          state: string
+        }
+        Update: {
+          city?: string
+          cost_multiplier?: number
+          created_at?: string
+          id?: string
+          state?: string
+        }
+        Relationships: []
+      }
       medical_supply_companies: {
         Row: {
           acceptsassignement: boolean | null
@@ -2811,6 +2963,54 @@ export type Database = {
             columns: ["senior_id"]
             isOneToOne: false
             referencedRelation: "seniors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plan_milestones: {
+        Row: {
+          completed: boolean | null
+          created_at: string
+          estimated_date: string | null
+          id: string
+          milestone_id: string | null
+          tasks: string | null
+          timeline_plan_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          completed?: boolean | null
+          created_at?: string
+          estimated_date?: string | null
+          id?: string
+          milestone_id?: string | null
+          tasks?: string | null
+          timeline_plan_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          completed?: boolean | null
+          created_at?: string
+          estimated_date?: string | null
+          id?: string
+          milestone_id?: string | null
+          tasks?: string | null
+          timeline_plan_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plan_milestones_milestone_id_fkey"
+            columns: ["milestone_id"]
+            isOneToOne: false
+            referencedRelation: "timeline_milestones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "plan_milestones_timeline_plan_id_fkey"
+            columns: ["timeline_plan_id"]
+            isOneToOne: false
+            referencedRelation: "timeline_plans"
             referencedColumns: ["id"]
           },
         ]
@@ -3393,6 +3593,68 @@ export type Database = {
           },
         ]
       }
+      timeline_milestones: {
+        Row: {
+          care_level_required: string | null
+          created_at: string
+          description: string | null
+          estimated_timeframe: string | null
+          id: string
+          name: string
+          task_template: string | null
+        }
+        Insert: {
+          care_level_required?: string | null
+          created_at?: string
+          description?: string | null
+          estimated_timeframe?: string | null
+          id?: string
+          name: string
+          task_template?: string | null
+        }
+        Update: {
+          care_level_required?: string | null
+          created_at?: string
+          description?: string | null
+          estimated_timeframe?: string | null
+          id?: string
+          name?: string
+          task_template?: string | null
+        }
+        Relationships: []
+      }
+      timeline_plans: {
+        Row: {
+          assessment_id: string | null
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          assessment_id?: string | null
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          assessment_id?: string | null
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "timeline_plans_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "care_needs_assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tours: {
         Row: {
           created_at: string
@@ -3594,6 +3856,39 @@ export type Database = {
           Source?: string | null
           State?: string | null
           Zip?: number | null
+        }
+        Relationships: []
+      }
+      user_emergency_contacts: {
+        Row: {
+          created_at: string
+          id: string
+          is_primary: boolean | null
+          name: string
+          phone: string
+          relationship: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_primary?: boolean | null
+          name: string
+          phone: string
+          relationship: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_primary?: boolean | null
+          name?: string
+          phone?: string
+          relationship?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }

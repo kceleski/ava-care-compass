@@ -30,6 +30,10 @@ import {
 import ResourceCard from './ResourceCard';
 import ToolCard from './ToolCard';
 import ResourceModal from './ResourceModal';
+import CostCalculator from './tools/CostCalculator';
+import FacilityFinder from './tools/FacilityFinder';
+import TimelinePlanner from './tools/TimelinePlanner';
+import EmergencyContacts from './tools/EmergencyContacts';
 
 const ResourcesPage = () => {
   const [avaQuery, setAvaQuery] = useState('');
@@ -44,6 +48,7 @@ const ResourcesPage = () => {
     tag: string;
   } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTool, setSelectedTool] = useState<string | null>(null);
 
   const handleResourceView = (resource: { title: string; description: string; type: string; tag: string }) => {
     setSelectedResource(resource);
@@ -358,7 +363,7 @@ const ResourcesPage = () => {
                 description={tool.description}
                 icon={tool.icon}
                 action={tool.action}
-                onClick={() => console.log(`Using ${tool.title}`)}
+                onClick={() => setSelectedTool(tool.title)}
               />
             ))}
           </div>
@@ -439,6 +444,24 @@ const ResourcesPage = () => {
         onClose={() => setIsModalOpen(false)}
         resource={selectedResource}
       />
+
+      {/* Tool Modals */}
+      {selectedTool && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-4 border-b flex justify-between items-center">
+              <h2 className="text-xl font-semibold">{selectedTool}</h2>
+              <Button variant="outline" onClick={() => setSelectedTool(null)}>Close</Button>
+            </div>
+            <div className="p-6">
+              {selectedTool === 'Care Cost Calculator' && <CostCalculator />}
+              {selectedTool === 'Facility Finder' && <FacilityFinder />}
+              {selectedTool === 'Care Timeline Planner' && <TimelinePlanner />}
+              {selectedTool === 'Emergency Contacts' && <EmergencyContacts />}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
